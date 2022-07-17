@@ -381,7 +381,6 @@ function MapComponent() {
         const [duration, setDuration] = useState('')
         
         const [clickedPos, setClickedPos] = useState({})
-        const [searchType, setSearchType] = useState('')
         /** @type React.MutableRefObject<HTMLInputElement> */
         const originRef = useRef()
         /** @type React.MutableRefObject<HTMLInputElement> */
@@ -389,7 +388,6 @@ function MapComponent() {
         /** @type React.MutableRefObject<HTMLInputElement> */
         const waypointsRef = useRef()
         /** @type React.MutableRefObject<HTMLInputElement> */
-        const searchTypeRef = useRef()
 
         const onMapClick = (e) => {
             setClickedPos({ lat: e.latLng.lat(), lng: e.latLng.lng() });
@@ -401,11 +399,6 @@ function MapComponent() {
             }
         }, [clickedPos])
 
-        useEffect(() => {
-            if (searchType !== '') {
-                console.log("searchType: " + (searchType))
-            }
-        }, [searchType])
       
       async function calculateRoute() {
         if (originRef.current.value === '' || destiantionRef.current.value === '') {
@@ -545,17 +538,6 @@ function MapComponent() {
             <button colorscheme='pink' type='submit' onClick={calculateRoute}>
               Calculate Route
             </button>
-            <select name="searchOptions" id="searchOptions" onChange={(e) => setSearchType(e.target.value)} onSelect={(e) => setSearchType(e.target.value)}>
-                <option value="" disabled selected>Search for ...</option>
-                <option value="cafe">Cafes</option>
-                <option value="museum">Museums</option>
-                <option value="food">Food</option>
-                <option value="book_store">Book stores</option>
-                <option value="park">Parks</option>
-                <option value="tourist_attraction">Touristy places</option>
-                <option value="store">Stores</option>
-                <option value="restaurant">Restaurants</option>
-            </select>
             <CurrentPosition.Provider value={JSON.stringify(clickedPos)}>
                 <MapSearch />
             </CurrentPosition.Provider>

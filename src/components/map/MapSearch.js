@@ -3,20 +3,20 @@ import {CurrentPosition} from './Map';
 
 function MapSearch() {
   const theLocation = useContext(CurrentPosition);
-  const PLACE_RADIUS = 2500;
+  const placeRadius = 2500;
   const [searchType, setSearchType] = useState('')
   useEffect(() => {
     if (theLocation !== '{}' && theLocation !== null && searchType !== '') {
       console.log("The Location is not null" + JSON.parse(theLocation).lat);
       var latitude = JSON.parse(theLocation).lat;
       var longitude = JSON.parse(theLocation).lng;
-      fetchNearbyPlaces(latitude, longitude, PLACE_RADIUS, searchType);
+      fetchNearbyPlaces(latitude, longitude, placeRadius, searchType);
     }
 }, [{CurrentPosition}])
 
-  const fetchNearbyPlaces =  async (lat, lng, PLACE_RADIUS, searchType) => {
+  const fetchNearbyPlaces =  async (lat, lng, placeRadius, searchType) => {
     const response = await fetch(
-      `https://trueway-places.p.rapidapi.com/FindPlacesNearby?location=${lat}%2C${lng}&language=en&radius=${PLACE_RADIUS}&type=${searchType}`,
+      `https://trueway-places.p.rapidapi.com/FindPlacesNearby?location=${lat}%2C${lng}&language=en&radius=${placeRadius}&type=${searchType}`,
       {
         method: 'GET',
         headers: {
