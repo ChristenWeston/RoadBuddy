@@ -17,25 +17,29 @@ function App(){
     <React.Fragment>
         <Router>
           <Header />
-          {/* <div className="d-flex flex-row"> */}
+          <div className="d-flex flex-row">
           {/* <Sidebar /> */}
           {/* <TripControl /> */}
           {/* <Hotels /> */}
           <div id="mapContainer">
                 <div id="mapClipPath">
-                    <Map />
+                    {/* <Map /> */}
                 </div>
             </div>
-            {/* </div> */}
-          <MapSearch />
-          <Switch>
-          <Route path="/signin">
-            <Signin />
-          </Route>
-          <Route path="/">
-            <TripControl />
-          </Route>
-        </Switch>
+            </div>
+          {/* <MapSearch /> */}
+          <div className ="form-group row">
+            <div class="col-sm-10">
+              <Switch>
+              <Route path="/signin">
+                <Signin />
+              </Route>
+              <Route path="/">
+                <TripControl />
+              </Route>
+            </Switch>
+          </div>
+        </div>
 
         </Router>
     </React.Fragment>

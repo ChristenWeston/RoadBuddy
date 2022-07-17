@@ -513,14 +513,14 @@ function MapComponent() {
                 </InfoWindow>
             )}
 
-    <Polygon
+    {/* <Polygon
       onLoad={onLoad}
       paths={paths}
       options={options}
     />
       <Polyline
       path={[{ lat: 45.47559825717784, lng: -122.53564893387593 }, { lat: 45.512660385980794, lng: -122.59435712512872 }]}
-    />
+    /> */}
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}

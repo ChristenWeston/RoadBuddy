@@ -71,12 +71,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 Notes:
-TrueWayPlaces API - Places types: 
-"park"
-"tourist_attraction"
-"cafe"
-"book_store"
-"store"
-"food"
-"restaurant"
-"museum"
+//Use Memo (or similar) for places search result
+//Pass back places results to be temporarily loaded on map
