@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+#map {
+  height: 125px;
+}
+
+#mapContainer {
+	background-color: white;
+	padding: 30px;
+  
+}
+
+#mapClipPath {
+	height: 550px;
+	width: 880px;
+  right: 10px;
+	background-color: white;
+	position: absolute;
+}

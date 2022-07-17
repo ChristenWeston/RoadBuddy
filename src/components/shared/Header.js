@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
 const RoadBuddyHeader = styled.h2`
-  font-size: 24px;
   text-align: center;
-  color: white;
 
   &:hover {
     color: MistyRose;
@@ -14,10 +12,7 @@ const RoadBuddyHeader = styled.h2`
 `;
 
 const StyledWrapper = styled.section`
-  background-color: OliveDrab;
-  border: 15px solid teal;
   margin: 10px;
-  border-color: RebeccaPurple;
 `;
 
 function Header(){

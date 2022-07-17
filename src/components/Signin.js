@@ -43,25 +43,35 @@ function Signin(){
     <React.Fragment>
       <h1>Sign up</h1>
       <form onSubmit={doSignUp}>
+      <fieldset>
+      <div class="form-group row">
+      
         <input
           type='text'
+          class='form-control-plaintext'
           name='email'
           placeholder='email' />
         <input
           type='password'
+          class='form-control-plaintext'
           name='password'
           placeholder='Password' />
         <button type='submit'>Sign up</button>
+        
+        </div>
+        </fieldset>
       </form>
 
       <h1>Sign In</h1>
       <form onSubmit={doSignIn}>
         <input
           type='text'
+          class='form-control-plaintext'
           name='signinEmail'
           placeholder='email' />
         <input
           type='password'
+          class='form-control-plaintext'
           name='signinPassword'
           placeholder='Password' />
         <button type='submit'>Sign in</button>
