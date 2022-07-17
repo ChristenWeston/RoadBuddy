@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="Nc2F03LCoHx2OpUqe3a3" name="Page-1">
-        <mxGraphModel dx="742" dy="403" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="804" dy="595" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -11,19 +11,25 @@
                     <mxGeometry x="350" y="40" width="100" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="7" value="" style="group" parent="1" vertex="1" connectable="0">
-                    <mxGeometry x="410" y="90" width="350" height="220" as="geometry"/>
+                    <mxGeometry x="410" y="90" width="350" height="250" as="geometry"/>
                 </mxCell>
                 <mxCell id="4" value="" style="shape=ext;double=1;rounded=0;whiteSpace=wrap;html=1;" parent="7" vertex="1">
-                    <mxGeometry width="350" height="220" as="geometry"/>
+                    <mxGeometry width="350" height="250.00000000000003" as="geometry"/>
                 </mxCell>
                 <mxCell id="5" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillWeight=4;hachureGap=8;hachureAngle=45;fillColor=#99FF33;sketch=1;" parent="7" vertex="1">
-                    <mxGeometry x="47.5" y="40" width="255" height="150" as="geometry"/>
+                    <mxGeometry x="47.5" y="45.45454545454546" width="255" height="170.45454545454547" as="geometry"/>
                 </mxCell>
                 <mxCell id="6" value="Map" style="text;strokeColor=none;fillColor=none;html=1;fontSize=19;fontStyle=1;verticalAlign=middle;align=center;" parent="7" vertex="1">
-                    <mxGeometry x="125" width="100" height="40" as="geometry"/>
+                    <mxGeometry x="125" width="100" height="45.45454545454546" as="geometry"/>
                 </mxCell>
-                <mxCell id="10" value="Add Attractions Button" style="text;strokeColor=none;fillColor=none;html=1;fontSize=13;fontStyle=1;verticalAlign=middle;align=center;" parent="1" vertex="1">
-                    <mxGeometry x="630" y="330" width="100" height="40" as="geometry"/>
+                <mxCell id="10" value="SearchType&amp;nbsp; Button" style="text;strokeColor=none;fillColor=none;html=1;fontSize=13;fontStyle=1;verticalAlign=middle;align=center;" parent="7" vertex="1">
+                    <mxGeometry x="220" y="210" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="Add Hotels Button" style="text;strokeColor=none;fillColor=none;html=1;fontSize=13;fontStyle=1;verticalAlign=middle;align=center;" parent="7" vertex="1">
+                    <mxGeometry x="40" y="210" width="100" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="ClickedLocation[Lat,Long]" style="text;html=1;strokeColor=#3700CC;fillColor=#6a00ff;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#ffffff;" vertex="1" parent="7">
+                    <mxGeometry x="70" y="130" width="210" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="15" value="" style="group" parent="1" vertex="1" connectable="0">
                     <mxGeometry x="170" y="90" width="220" height="130" as="geometry"/>
@@ -55,8 +61,8 @@
                 <mxCell id="25" value="Navigation" style="text;strokeColor=none;fillColor=none;html=1;fontSize=16;fontStyle=1;verticalAlign=middle;align=center;" parent="1" vertex="1">
                     <mxGeometry x="20" y="40" width="100" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="26" value="Add Hotels Button" style="text;strokeColor=none;fillColor=none;html=1;fontSize=13;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="1">
-                    <mxGeometry x="435" y="330" width="100" height="40" as="geometry"/>
+                <mxCell id="31" value="TrueWayPlaces Fetch [Lat,Long], [searchType]" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="580" y="350" width="200" height="30" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
