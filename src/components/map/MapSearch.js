@@ -6,21 +6,21 @@ function MapSearch() {
   const PLACE_RADIUS = 2500;
   const [searchType, setSearchType] = useState('')
   useEffect(() => {
-    if (theLocation !== '{}' && theLocation !== null) {
+    if (theLocation !== '{}' && theLocation !== null && searchType !== '') {
       console.log("The Location is not null" + JSON.parse(theLocation).lat);
-      // console.log("The Location is not null" + theLocation.lat);
-      // console.log("Current position" + (JSON.stringify({CurrentPosition})));
-        // console.log("Not Null CurrentPosition" + JSON.parse(CurrentPosition).lat)
+      var latitude = JSON.parse(theLocation).lat;
+      var longitude = JSON.parse(theLocation).lng;
+      fetchNearbyPlaces(latitude, longitude, PLACE_RADIUS, searchType);
     }
 }, [{CurrentPosition}])
 
-  const fetchNearbyPlaces =  async (lat, lng) => {
+  const fetchNearbyPlaces =  async (lat, lng, PLACE_RADIUS, searchType) => {
     const response = await fetch(
       `https://trueway-places.p.rapidapi.com/FindPlacesNearby?location=${lat}%2C${lng}&language=en&radius=${PLACE_RADIUS}&type=${searchType}`,
       {
         method: 'GET',
         headers: {
-          'x-rapidapi-key': process.env.REACT_APP_API_KEY,
+          'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY,
           'x-rapidapi-host': 'trueway-places.p.rapidapi.com'
         }
       }
@@ -34,8 +34,6 @@ function MapSearch() {
     console.log(data);
     return data.results;
   };
-
-
 
   return (
     <div>
