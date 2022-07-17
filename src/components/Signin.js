@@ -43,23 +43,18 @@ function Signin(){
     <React.Fragment>
       <h1>Sign up</h1>
       <form onSubmit={doSignUp}>
-      <fieldset>
-      <div class="form-group row">
-      
-        <input
-          type='text'
-          class='form-control-plaintext'
-          name='email'
-          placeholder='email' />
-        <input
-          type='password'
-          class='form-control-plaintext'
-          name='password'
-          placeholder='Password' />
-        <button type='submit'>Sign up</button>
-        
-        </div>
-        </fieldset>
+          <input
+            type='text'
+            class='form-control-plaintext'
+            name='email'
+            placeholder='email' />
+
+          <input
+            type='password'
+            class='form-control-plaintext'
+            name='password'
+            placeholder='Password' />
+          <button type='submit' class="btn btn-primary">Sign up</button>
       </form>
 
       <h1>Sign In</h1>
@@ -74,11 +69,11 @@ function Signin(){
           class='form-control-plaintext'
           name='signinPassword'
           placeholder='Password' />
-        <button type='submit'>Sign in</button>
+        <button type='submit' class="btn btn-primary">Sign in</button>
       </form>
 
       <h1>Sign Out</h1>
-      <button onClick={doSignOut}>Sign out</button>
+      <button onClick={doSignOut} class="btn btn-warning">Sign out</button>
     </React.Fragment>
   );
 }
