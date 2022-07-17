@@ -1,15 +1,18 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import {CurrentPosition} from './Map';
 
 function MapSearch() {
-
+  const theLocation = useContext(CurrentPosition);
   const PLACE_RADIUS = 2500;
   const [searchType, setSearchType] = useState('')
   useEffect(() => {
-    if (CurrentPosition !== null) {
-        console.log("searchType: " + (CurrentPosition.lat))
+    if (theLocation !== '{}' && theLocation !== null) {
+      console.log("The Location is not null" + JSON.parse(theLocation).lat);
+      // console.log("The Location is not null" + theLocation.lat);
+      // console.log("Current position" + (JSON.stringify({CurrentPosition})));
+        // console.log("Not Null CurrentPosition" + JSON.parse(CurrentPosition).lat)
     }
-}, [CurrentPosition])
+}, [{CurrentPosition}])
 
   const fetchNearbyPlaces =  async (lat, lng) => {
     const response = await fetch(
