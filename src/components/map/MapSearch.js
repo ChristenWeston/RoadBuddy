@@ -80,9 +80,6 @@ function MapSearch() {
         )}
       </div>
     </div>
-    {/* <MapSearchResults.Provider value={JSON.stringify(searchResults)}>
-      <MapComponent />
-    </MapSearchResults.Provider> */}
     </React.Fragment>
   )
 }

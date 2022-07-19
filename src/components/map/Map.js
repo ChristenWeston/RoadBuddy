@@ -398,7 +398,6 @@ function MapComponent() {
                 console.log("Clicked pos: " + JSON.stringify(clickedPos))
             }
         }, [clickedPos])
-
       
       async function calculateRoute() {
         if (originRef.current.value === '' || destiantionRef.current.value === '') {
