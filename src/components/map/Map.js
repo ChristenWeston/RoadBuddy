@@ -17,7 +17,7 @@ import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import MapSearch from "./MapSearch";
 
 export const CurrentPosition = React.createContext(null);
-function MapComponent() {
+function MapComponent(props) {
     
     const [selectedProperty, setSelectedProperty] = useState(null);
     const [selectedTrip, setSelectedTrip] = useState(null);
@@ -537,9 +537,11 @@ function MapComponent() {
             <button colorscheme='pink' type='submit' onClick={calculateRoute}>
               Calculate Route
             </button>
-            <CurrentPosition.Provider value={JSON.stringify(clickedPos)}>
+            <MapSearch
+                theClickedCurrentPos={JSON.stringify(clickedPos)} />
+            {/* <CurrentPosition.Provider value={JSON.stringify(clickedPos)}>
                 <MapSearch />
-            </CurrentPosition.Provider>
+            </CurrentPosition.Provider> */}
         </GoogleMap>
 
     )
