@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import useFetch from '../shared/useFetch';
 import ReusableForm from "../trip/ReusableForm";
 import Trip from "../trip/Trip";
-import { useFirestore } from 'react-redux-firebase'
+import { useFirestore } from 'react-redux-firebase';
 import { collection, addDoc } from "firebase/firestore";
 
 function Hotels (props) {
@@ -26,8 +26,6 @@ function Hotels (props) {
   useEffect(() => {
     if (selectedLat !== '' && selectedLong !== '') {
         console.log("selected lat jsons parse.name: " + (JSON.parse(selectedLat)).name);
-        // event.preventDefault();
-        // props.onNewTripCreation();
 
           firestore.collection("trips").add({
           name: (JSON.parse(selectedLat)).name|| null,
@@ -47,8 +45,6 @@ function Hotels (props) {
       { hotel && (
         <div>
           <h1>Hotel Time!</h1>
-          <h1>First Hotel suggestion</h1>
-          <h1>selectedLat: {selectedLat}</h1>
           {hotel.suggestions[1].entities.map((hotels, index, origArray) => (
             <div>
             <button onClick={(e) =>{setSelectedLat(e.target.value); setSelectedLong(e.target.value)}} value={JSON.stringify(origArray[index], ['latitude', 'longitude', 'type', 'name'])}>{hotels.name}</button>
