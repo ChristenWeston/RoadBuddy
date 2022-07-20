@@ -40,8 +40,8 @@ function MapSearch(props) {
   return (
     <React.Fragment>
     <div>
-      <select name="searchOptions" id="searchOptions" onChange={(e) => setSearchType(e.target.value)} onSelect={(e) => setSearchType(e.target.value)}>
-        <option value="" disabled selected>Search for ...</option>
+      <select name="searchOptions" id="searchOptions" defaultValue="" onChange={(e) => setSearchType(e.target.value)} onSelect={(e) => setSearchType(e.target.value)}>
+        <option value="" disabled>Search for ...</option>
         <option value="cafe">Cafes</option>
         <option value="museum">Museums</option>
         <option value="book_store">Book stores</option>
@@ -53,20 +53,11 @@ function MapSearch(props) {
       <button onClick={() => {fetchNearbyPlaces(theLocation, placeRadius, searchType)}}>Search!</button>
       <p>{props.theClickedCurrentPos}</p>
       <div>
-        {/* <CurrentPosition.Consumer>
-          {
-            CurrentPosition !== {} && (CurrentPosition => {
-              return <div>Current position: {CurrentPosition}</div>
-            })
-          }
-        </CurrentPosition.Consumer> */}
-      </div>
-      <div>
         { searchResults && (
           <div>
             <h1>Nearby {searchType}s</h1>
         {searchResults.map((nearbyResults, index, origArray) => (
-            <div>
+            <div key={index}>
               <h2>{nearbyResults.name}</h2>
               <h3>{nearbyResults.address}</h3>
               <p>Phone Number: {nearbyResults.phone_number}</p>
