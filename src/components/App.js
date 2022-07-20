@@ -23,13 +23,13 @@ function App(){
           {/* <Hotels /> */}
           <div id="mapContainer">
                 <div id="mapClipPath">
-                    {/* <Map /> */}
+                    <Map />
                 </div>
             </div>
             </div>
           {/* <MapSearch /> */}
           <div className ="form-group row">
-            <div class="col-sm-10">
+            <div className="col-sm-10">
               <Switch>
               <Route path="/signin">
                 <Signin />
