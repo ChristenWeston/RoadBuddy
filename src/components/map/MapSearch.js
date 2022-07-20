@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect, useContext, useMemo } from "react";
-import {CurrentPosition} from './Map';
-
-export const MapSearchResults = React.createContext(null);
+import { useFirestore } from 'react-redux-firebase';
 
 function MapSearch(props) {
   // const theLocation = useContext(CurrentPosition);
+  const firestore = useFirestore(); 
   const theLocation = props.theClickedCurrentPos;
   const placeRadius = 2500;
   const [searchType, setSearchType] = useState('')
   const [searchResults, setSearchResults] = useState(null)
+  const [selectedPlace, setSelectedPlace] = useState('');
 
   const fetchNearbyPlaces =  async (theLocation, placeRadius, searchType) => {
         if (theLocation !== '{}' && theLocation !== null && searchType !== '') {
@@ -36,6 +36,19 @@ function MapSearch(props) {
           return data.results;
         }
   };
+  useEffect(() => {
+    if (selectedPlace !== '') {
+        // console.log("selected lat jsons parse.name: " + (JSON.parse(selectedPlace.location)).lat);
+        console.log("selected lat jsons parse.name: " + (JSON.parse(selectedPlace)).location.lat);
+          firestore.collection("trips").add({
+          name: (JSON.parse(selectedPlace)).name|| null,
+          latitude: (JSON.parse(selectedPlace)).location.lat || null,
+          longitude: (JSON.parse(selectedPlace)).location.lng || null,
+          type: searchType || null
+        }
+        );
+    }
+  }, [selectedPlace])
 
   return (
     <React.Fragment>
@@ -63,7 +76,8 @@ function MapSearch(props) {
               <p>Phone Number: {nearbyResults.phone_number}</p>
               <p><a href={nearbyResults.website}>{nearbyResults.website}</a></p>
               <p>Distance from location: {nearbyResults.distance} meters</p>
-            <button onClick={(e) =>{console.log("Button")}} value={JSON.stringify(origArray[index], ['latitude', 'longitude', 'type', 'name'])}>{nearbyResults.name}</button>
+              <p>Lat: {nearbyResults.location.lat} long: {nearbyResults.location.lng}</p>
+              <button onClick={(e) =>{setSelectedPlace(e.target.value)}} value={JSON.stringify(origArray[index])}>Add to trip</button>
             </div>
           ))}
           </div>

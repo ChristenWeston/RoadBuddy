@@ -14,11 +14,10 @@ import {
 import properties from "./data/Properties.json";
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
-import MapSearch from "./MapSearch";
+import MapSearch, { MapSearchResults } from "./MapSearch";
 
-export const CurrentPosition = React.createContext(null);
+
 function MapComponent(props) {
-    
     const [selectedProperty, setSelectedProperty] = useState(null);
     const [selectedTrip, setSelectedTrip] = useState(null);
 
@@ -520,6 +519,12 @@ function MapComponent(props) {
       <Polyline
       path={[{ lat: 45.47559825717784, lng: -122.53564893387593 }, { lat: 45.512660385980794, lng: -122.59435712512872 }]}
     /> */}
+    <div>
+         {
+           
+         }
+        {/* // <p>{MapSearch.props.theClickedCurrentPos && <p>Hi</p>}</p> */}
+    </div>
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}
@@ -538,10 +543,9 @@ function MapComponent(props) {
               Calculate Route
             </button>
             <MapSearch
-                theClickedCurrentPos={JSON.stringify(clickedPos)} />
-            {/* <CurrentPosition.Provider value={JSON.stringify(clickedPos)}>
-                <MapSearch />
-            </CurrentPosition.Provider> */}
+                theClickedCurrentPos={JSON.stringify(clickedPos)}
+                key={JSON.stringify(clickedPos)} 
+                />
         </GoogleMap>
 
     )
