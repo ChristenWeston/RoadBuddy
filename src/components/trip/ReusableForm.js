@@ -115,14 +115,12 @@ const ReusableForm = () => {
               value={inputField.adventureStop}
               onChange={event => handleChangeInput(inputField.id, event)}
             />
-            <button className="btn btn-warning" disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>Remove Day</button>
-            <button className="btn btn-light" onClick={handleAddFields}>Add day</button>
+            <button className="btn btn-warning btn-sm" disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>Remove Day</button>
+            <button className="btn btn-light btn-sm" onClick={handleAddFields}>Add day</button>
           </div>
         )) }
-
-        	<button className="btn btn-primary" onClick={addNewTrip}>
-					Save trip
-				</button>
+          <br />
+        	<button className="btn btn-primary btn-lg" onClick={addNewTrip}>Save trip</button>
       </form>
     </React.Fragment>
   );

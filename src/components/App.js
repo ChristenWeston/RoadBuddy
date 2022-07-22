@@ -3,6 +3,7 @@ import Header from "./shared/Header";
 import Sidebar from "./shared/Sidebar";
 import Hotels from './hotel/Hotels';
 import TripControl from "./trip/TripControl";
+import ReusableForm from "./trip/ReusableForm";
 import styled from 'styled-components';
 import TripList from "./trip/TripList";
 import Map from "./map/Map";
@@ -23,7 +24,7 @@ function App(){
           {/* <Hotels /> */}
           <div id="mapContainer">
                 <div id="mapClipPath">
-                    <Map />
+                    {/* <Map /> */}
                 </div>
             </div>
             </div>
@@ -35,7 +36,10 @@ function App(){
                 <Signin />
               </Route>
               <Route path="/">
-                <TripControl />
+                {/* <TripControl /> */}
+              </Route>
+              <Route path="/startTrip">
+                <ReusableForm />
               </Route>
             </Switch>
           </div>

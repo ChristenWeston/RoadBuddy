@@ -31,6 +31,9 @@ function Header(){
           <li>
             <Link to="/signin">Sign In</Link>
           </li>
+          <li>
+            <Link to="/startTrip">Begin trip</Link>
+          </li>
         </ul>
         </StyledWrapper>
       </React.Fragment>
