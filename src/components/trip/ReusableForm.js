@@ -14,7 +14,6 @@ const ReusableForm = () => {
   const [wayPoints, setWaypoints] = useState("");
 
   function addNewTrip(event) {
-    console.log("Add New Trip ", inputFields);
     event.preventDefault();
 
     return firestore.collection("mainTrip").add({
@@ -39,7 +38,6 @@ const ReusableForm = () => {
       }
       return i;
     })
-    console.log(newInputFields);
     setInputFields(newInputFields);
   }
 
@@ -97,26 +95,32 @@ const ReusableForm = () => {
 
         { inputFields.map(inputField => (
           <div key={inputField.id}>
+            <label>Food Stop Stop</label>
             <input
               name="foodStop"
+              className="form-control"
               label="Food Stop"
               variant="filled"
+              placeholder="Where to eat"
               value={inputField.foodStop}
               onChange={event => handleChangeInput(inputField.id, event)}
             />
+            <label>Adventure Stop</label>
             <input
               name="adventureStop"
+              className="form-control"
               label="Adventure Stop"
               variant="filled"
+              placeholder="Where to have fun"
               value={inputField.adventureStop}
               onChange={event => handleChangeInput(inputField.id, event)}
             />
-            <button disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>Remove Day</button>
-            <button onClick={handleAddFields}>Add day</button>
+            <button className="btn btn-warning" disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>Remove Day</button>
+            <button className="btn btn-light" onClick={handleAddFields}>Add day</button>
           </div>
         )) }
 
-        	<button className="btn-primary" onClick={addNewTrip}>
+        	<button className="btn btn-primary" onClick={addNewTrip}>
 					Save trip
 				</button>
       </form>
