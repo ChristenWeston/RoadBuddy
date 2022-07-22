@@ -1,127 +1,127 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from "prop-types";
 import Trip from "./Trip";
-import {v4 as uuidv4} from "uuid"
+import {v4 as uuidv4} from "uuid";
+import { useFirestore } from 'react-redux-firebase'
+import { collection, addDoc } from "firebase/firestore";
 
 const ReusableForm = () => {
+  const firestore = useFirestore();
+  const [tripName, setTripName] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [numberOfDays, setNumberOfDays] = useState("");
+  const [wayPoints, setWaypoints] = useState("");
 
-  const [tripDayField, setTripDayField] = useState([
-    {
-      date: "",
-      sleepingLocation: "",
-      breakfast: "",
-      lunch: "",
-      dinner: "",
-      id: uuidv4(),
-    },
-  ])
+  function addNewTrip(event) {
+    console.log("Add New Trip ", inputFields);
+    event.preventDefault();
 
-  const addTripDayRow = () => {
-    let _tripDayField = [...tripDayField]
-    _tripDayField.push({
-      date: "",
-      sleepingLocation: "",
-      breakfast: "",
-      lunch: "",
-      dinner: "",
-      id: uuidv4(),
-		})
-    setTripDayField(_tripDayField)
+    return firestore.collection("mainTrip").add({
+      tripName: tripName,
+      startDate: startDate,
+      endDate: endDate,
+      numberOfDays: numberOfDays,
+      wayPoints: wayPoints,
+      tripDays: inputFields,
+      dateEntered: firestore.FieldValue.serverTimestamp()
+    });
   }
 
-  const removeTripDayRow = (id) => {
+  const [inputFields, setInputFields] = useState([
+    { id: uuidv4(), foodStop: '', adventureStop: '' },
+  ]);
 
-		let _tripDayField = [...tripDayField]
-		_tripDayField = _tripDayField.filter((tripDay) => tripDay.id !== id)
-		setTripDayField(_tripDayField)
-	}
+  const handleChangeInput = (id, event) => {
+    const newInputFields = inputFields.map(i => {
+      if(id === i.id) {
+        i[event.target.name] = event.target.value
+      }
+      return i;
+    })
+    console.log(newInputFields);
+    setInputFields(newInputFields);
+  }
 
-	const handleTripDayChange = (
-		id,
-		event,
-	) => {
-		//find the index to be changed
-		const index = tripDayField.findIndex((t) => t.id === id)
+  const handleAddFields = () => {
+    setInputFields([...inputFields, { id: uuidv4(),  foodStop: '', adventureStop: '' }])
+  }
 
-		let _tripDayField = [...tripDayField]
-		_tripDayField[index][event.target.name] = event.target.value
-		setTripDayField(_tripDayField)
-	}
-
-  const handleTripDay = () => {
-		console.table(tripDayField)
-	}
+  const handleRemoveFields = id => {
+    const values  = [...inputFields];
+    values.splice(values.findIndex(value => value.id === id), 1);
+    setInputFields(values);
+  }
 
   return (
     <React.Fragment>
-      {/* <form onSubmit={props.formSubmissionHandler}> */}
+      <form onSubmit={addNewTrip}>
       <input
           type="text"
-          class="form-control"
+          className="form-control"
           name="tripName"
-          placeholder="Name your trip" />
+          placeholder="Name your trip"
+          value={tripName}
+          onChange={(e) => setTripName(e.target.value)} />
         <input
           type="text"
-          class="form-control"
+          className="form-control"
           name="startDate"
-          placeholder="First day of trip" />
+          placeholder="First day of trip" 
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}/>
+        <input
+          type="text"
+          className="form-control"
+          name="endDate"
+          placeholder="Last day of trip"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)} />
         <input
           type="number"
-          class="form-control"
+          className="form-control"
           min={1}
           name="numberOfDays"
           placeholder="Trip length (days)"
-          // onChange={(e) => setTripDayField(e.target.value)}
+          value={numberOfDays}
+          onChange={(e) => setNumberOfDays(e.target.value)}
            />
-        {/* <button onClick={(e) => onClickingIncreaseDays()} >Add days to trip</button> */}
-          
-        {tripDayField.map((tripDay) => (
-					<div className="form-row" key={tripDay.id}>
-						<div className="input-group">
-							<label htmlFor="name">Name</label>
-							<input
-								name="name"
-								type="text"
-								onChange={(e) => handleTripDayChange(tripDay.id, e)}
-							/>
-						</div>
-						<div className="input-group">
-							<label htmlFor="email">Email</label>
-							<input
-								name="email"
-								type="text"
-								onChange={(e) => handleTripDayChange(tripDay.id, e)}
-							/>
-						</div>
-						{tripDayField.length > 1 && (
-							<button onClick={() => removeTripDayRow(tripDay.id)}>-</button>
-						)}
-
-						<button onClick={addTripDayRow}>+</button>
-					</div>
-				))}
-
-
-        <input
-          type="text"
-          class="form-control"
-          name="endDate"
-          placeholder="Last day of trip" />
         <input 
           type="number"
-          class="form-control"
+          className="form-control"
           min={1}
           name="waypoints"
-          placeholder="Number of stops along trip" />
-        {/* <button type='submit'>{props.buttonText}</button> */}
-      {/* </form> */}
+          placeholder="Number of stops along trip" 
+          value={wayPoints}
+          onChange={(e) => setWaypoints(e.target.value)}/>
+
+        { inputFields.map(inputField => (
+          <div key={inputField.id}>
+            <input
+              name="foodStop"
+              label="Food Stop"
+              variant="filled"
+              value={inputField.foodStop}
+              onChange={event => handleChangeInput(inputField.id, event)}
+            />
+            <input
+              name="adventureStop"
+              label="Adventure Stop"
+              variant="filled"
+              value={inputField.adventureStop}
+              onChange={event => handleChangeInput(inputField.id, event)}
+            />
+            <button disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>Remove Day</button>
+            <button onClick={handleAddFields}>Add day</button>
+          </div>
+        )) }
+
+        	<button className="btn-primary" onClick={addNewTrip}>
+					Save trip
+				</button>
+      </form>
     </React.Fragment>
   );
 }
-
-ReusableForm.propTypes = {
-  formSubmissionHandler: PropTypes.func,
-  buttonText: PropTypes.string
-};
 
 export default ReusableForm;
