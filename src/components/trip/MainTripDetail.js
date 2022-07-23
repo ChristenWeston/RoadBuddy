@@ -1,28 +1,33 @@
 import React from "react";
 import PropTypes from "prop-types";
+import MyTrip from "./myTrip";
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 
 function MainTripDetail(props){
   useFirestoreConnect([
-    { collection: 'mainTrip' }
+    { collection: 'mainTrip' },
+    { collection: 'trip'}
   ]);
 
   const mainTrip = useSelector(state => state.firestore.ordered.mainTrip);
+  const tripLocations = useSelector(state => state.firestore.ordered.trip);
   if (isLoaded(mainTrip)) {
     return (
       <React.Fragment>
         <hr/>
         <h1>My Trips</h1>
-        {mainTrip.map((trip) => (
-          <>
-          <div key={trip.id}>
-            <h3>{trip.tripName}</h3>
-            <p>{trip.startDate} - {trip.endDate}</p>
-            <p>Trip Days: {trip.tripDays.length}</p>
-          </div>
-        </>
-        ))}
+        {mainTrip.map((trip) => {
+          return <MyTrip
+            whenTripClicked = { props.onTripSelection }
+            tripName={trip.tripName}
+            startDate={trip.startDate}
+            endDate={trip.endDate}
+            numberOfDays={trip.tripDays.length}
+            wayPoints={trip.wayPoints}
+            id={trip.id}
+            key={trip.id}/>
+        })}
       </React.Fragment>
     );
   } else {
@@ -35,9 +40,8 @@ function MainTripDetail(props){
 }
 
 MainTripDetail.propTypes = {
-  // ticket: PropTypes.object,
-  // onClickingDelete: PropTypes.func,
-  // onClickingEdit: PropTypes.func
+  onTripSelection: PropTypes.func,
+  onClickingEdit: PropTypes.func
 };
 
 export default MainTripDetail;
