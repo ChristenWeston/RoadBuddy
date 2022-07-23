@@ -3,6 +3,8 @@ import Hotels from '../hotel/Hotels.js';
 import Map from "../map/Map.js";
 import ReusableForm from "../trip/ReusableForm";
 import TripList from './TripList';
+import TripDetail from './TripDetail';
+import Trip from './Trip';
 import EditTripForm from './EditTripForm';
 import MainTripDetail from './MainTripDetail';
 import { connect } from 'react-redux';
@@ -55,6 +57,8 @@ class TripControl extends React.Component {
         tripName: trip.get("tripName"),
         startDate: trip.get("startDate"),
         endDate: trip.get("endDate"),
+        numberOfDays: trip.get("numberOfDays"),
+        wayPoints: trip.get("wayPoints"),
         id: trip.id
       }
       this.setState({selectedTrip: firestoreTrip });
@@ -62,7 +66,7 @@ class TripControl extends React.Component {
   }
 
   handleDeletingTrip = (id) => {
-    this.props.firestore.delete({collection: 'trips', doc: id});
+    this.props.firestore.delete({collection: 'mainTrips', doc: id});
     this.setState({selectedTrip: null});
   }
 
@@ -105,11 +109,11 @@ class TripControl extends React.Component {
         currentlyVisibleState = <EditTripForm trip = {this.state.selectedTrip} 
         onEditTrip = {this.handleEditingTripInList} />
         buttonText = "Return to Trip List";
-      // } else if (this.state.selectedTrip != null) {
-        // currentlyVisibleState = <TripDetail trip = {this.state.selectedTrip} 
-          // onClickingDelete = {this.handleDeletingTrip} 
-          // onClickingEdit = {this.handleEditClick} />
-        // buttonText = "Return to Trip List";
+      } else if (this.state.selectedTrip != null) {
+        currentlyVisibleState = <TripDetail trip = {this.state.selectedTrip} 
+          onClickingDelete = {this.handleDeletingTrip} 
+          onClickingEdit = {this.handleEditClick} />
+        buttonText = "Return to My Trips";
       } else if (this.props.formVisibleOnPage) {
         console.log("Form visible on page");
         currentlyVisibleState = <Hotels onNewTripCreation={this.handleAddingNewTripToList}  />;
@@ -125,7 +129,7 @@ class TripControl extends React.Component {
           </div>
           <ReusableForm /> 
           <Hotels onNewTripCreation={this.handleAddingNewTripToList}/> */}
-          <MainTripDetail MainTripDetail={this.props.mainTripList} />
+          <MainTripDetail MainTripDetail={this.props.mainTripList} onTripSelection={this.handleChangingSelectedTrip}/>
         </div>;
         // Because a user will actually be clicking on the trip in the Trip component, we will need to pass our new handleChangingSelectedTrip method as a prop.
         buttonText = "Add Trip";
