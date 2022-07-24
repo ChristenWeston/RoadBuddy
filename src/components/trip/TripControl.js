@@ -18,6 +18,8 @@ class TripControl extends React.Component {
     super(props);
     this.state = {
       selectedTrip: null,
+      selectedActivity: null,
+      mapSearchVisible: null,
       // mainTripList: null,
       editing: false
     };
@@ -38,6 +40,7 @@ class TripControl extends React.Component {
         editing: false
       });
     } else {
+      console.log("Handle Click this.props: " + this.props);
       const { dispatch } = this.props;
       const action = a.toggleForm();
       dispatch(action);
@@ -68,6 +71,24 @@ class TripControl extends React.Component {
     });
   }
 
+  handleChangingSelectedTripActivities = (id) => {
+    console.log("changing selected trip activities");
+    //ToDo select activity here
+    // this.props.firestore.get({collection: 'trips'}).where("matchingTripId", "==", id)
+    // .then((activity) => {
+    //   const firestoreActivitiy = {
+    //     activityDayOfTrip: activity.get("activityDayOfTrip"),
+    //     latitude: activity.get("latitude"),
+    //     longitude: activity.get("longitude"),
+    //     name: activity.get("name"),
+    //     type: activity.get("type"),
+    //     id: activity.id
+    //   }
+    //   console.log("firestoreActivitiy: " + firestoreActivitiy);
+    //   this.setState({selectedActivity: firestoreActivitiy });
+    // });
+  }
+
   handleDeletingTrip = (id) => {
     this.props.firestore.delete({collection: 'mainTrip', doc: id});
     this.setState({selectedTrip: null});
@@ -83,6 +104,11 @@ class TripControl extends React.Component {
       editing: false,
       selectedTrip: null
     })
+  }
+
+  handleAddingAdventure = () => {
+    this.setState({mapSearchVisible: true});
+    console.log("Adding adventure time");
   }
 
   render(){
@@ -112,10 +138,29 @@ class TripControl extends React.Component {
         currentlyVisibleState = <EditTripForm trip = {this.state.selectedTrip} 
         onEditTrip = {this.handleEditingTripInList} />
         buttonText = "Return to Trip List";
-      } else if (this.state.selectedTrip != null) {
-        currentlyVisibleState = <TripDetail trip = {this.state.selectedTrip} 
+      } else if (this.state.selectedTrip != null && this.state.mapSearchVisible == null) {
+        currentlyVisibleState = <TripDetail trip = {this.state.selectedTrip}
+          activities = {this.state.selectedActivity}
           onClickingDelete = {this.handleDeletingTrip} 
-          onClickingEdit = {this.handleEditClick} />
+          onClickingEdit = {this.handleEditClick} 
+          onClickingAddAdventure = {this.handleAddingAdventure}
+          onClickingAddFood = {this.handleAddingFood}/>
+        buttonText = "Return to My Trips";
+      } else if (this.state.selectedTrip != null && this.state.mapSearchVisible != null) {
+        currentlyVisibleState = 
+        <div>
+          <TripDetail trip = {this.state.selectedTrip}
+          activities = {this.state.selectedActivity}
+          onClickingDelete = {this.handleDeletingTrip} 
+          onClickingEdit = {this.handleEditClick} 
+          onClickingAddAdventure = {this.handleAddingAdventure}
+          onClickingAddFood = {this.handleAddingFood}/>
+          <div id="mapContainer">
+            <div id="mapClipPath">
+              <Map theMainTripSelection= {this.state.selectedTrip}/>
+            </div>
+          </div>
+        </div>
         buttonText = "Return to My Trips";
       } else if (this.props.formVisibleOnPage) {
         console.log("Form visible on page");
@@ -132,7 +177,7 @@ class TripControl extends React.Component {
           </div>
           <ReusableForm /> 
           <Hotels onNewTripCreation={this.handleAddingNewTripToList}/> */}
-          <MainTripDetail MainTripDetail={this.props.mainTripList} onTripSelection={this.handleChangingSelectedTrip}/>
+          <MainTripDetail MainTripDetail={this.props.mainTripList} onTripSelection={this.handleChangingSelectedTrip} onActivities={this.handleChangingSelectedTripActivities}/>
         </div>;
         // Because a user will actually be clicking on the trip in the Trip component, we will need to pass our new handleChangingSelectedTrip method as a prop.
         buttonText = "Add Trip";

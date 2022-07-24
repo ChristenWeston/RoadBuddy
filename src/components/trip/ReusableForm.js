@@ -96,7 +96,7 @@ const ReusableForm = () => {
 
         { inputFields.map(inputField => (
           <div key={inputField.id}>
-            <label>Food Stop Stop</label>
+            <label>Food Stop</label>
             <input
               name="foodStop"
               className="form-control"

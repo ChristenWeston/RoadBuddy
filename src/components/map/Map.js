@@ -20,6 +20,7 @@ import MapSearch, { MapSearchResults } from "./MapSearch";
 function MapComponent(props) {
     const [selectedProperty, setSelectedProperty] = useState(null);
     const [selectedTrip, setSelectedTrip] = useState(null);
+    const theMainTripSelection = props.theMainTripSelection;
 
     useFirestoreConnect([
         { collection: 'trips' }
@@ -440,6 +441,7 @@ function MapComponent(props) {
             defaultCenter={{ lat: 45.50369791922873, lng: -122.58457242648787 }}
             defaultOptions={{styles: mapStyles }}
             onClick={onMapClick}
+            theMainTripSelection = {props.theMainTripSelection}
         >
             {/* {properties.map(property => (
                 <Marker 
@@ -544,7 +546,8 @@ function MapComponent(props) {
             </button>
             <MapSearch
                 theClickedCurrentPos={JSON.stringify(clickedPos)}
-                key={JSON.stringify(clickedPos)} 
+                key={JSON.stringify(clickedPos)}
+                theMainTripSelection={JSON.stringify(theMainTripSelection)}
                 />
         </GoogleMap>
 
@@ -553,13 +556,14 @@ function MapComponent(props) {
 
 const WrappedMap = withScriptjs(withGoogleMap(MapComponent));
 
-function Map() {
+function Map(props) {
     return (
         <WrappedMap 
             googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_GOOGLE_KEY}`}
             loadingElement={<div style={{ height:"100%"}} />}
             containerElement={<div style={{ height:"100%"}} />}
             mapElement={<div style={{ height:"100%"}} />}
+            theMainTripSelection = {props.theMainTripSelection}
         />
 
     )

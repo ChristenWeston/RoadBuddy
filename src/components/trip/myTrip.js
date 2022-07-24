@@ -10,6 +10,7 @@ function MyTrip(props) {
         <p>{props.endDate}</p>
         <p>{props.numberOfDays}</p>
         <p>{props.wayPoints}</p>
+        <p>{props.activities}</p>
       </div>
     </React.Fragment>
   );
