@@ -1,21 +1,25 @@
 import React, { useState, useRef, useEffect, useContext, useMemo } from "react";
 import { useFirestore } from 'react-redux-firebase';
+import { doc, setDoc, updateDoc, collection, addDoc } from "firebase/firestore";
 
 function MapSearch(props) {
   // const theLocation = useContext(CurrentPosition);
   const firestore = useFirestore(); 
   const theLocation = props.theClickedCurrentPos;
   const placeRadius = 2500;
+  const mainTripSelection = props.theMainTripSelection;
   const [searchType, setSearchType] = useState('')
   const [searchResults, setSearchResults] = useState(null)
   const [selectedPlace, setSelectedPlace] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState('');
+  const [tripDayToAddFoundPlace, setTripDayToAddFoundPlace] = useState('')
 
   const fetchNearbyPlaces =  async (theLocation, placeRadius, searchType) => {
         if (theLocation !== '{}' && theLocation !== null && searchType !== '') {
           console.log("The Location is not null" + JSON.parse(theLocation).lat);
           var lat = JSON.parse(theLocation).lat;
           var lng = JSON.parse(theLocation).lng;
-          console.log("Fetch nearby places");
+          console.log("Fetch nearby places" + JSON.parse(mainTripSelection).tripName + " mainTripSelectionDays" + JSON.parse(mainTripSelection).tripDays[0].adventureStop + JSON.parse(mainTripSelection).numberOfDays);
           const response = await fetch(
             `https://trueway-places.p.rapidapi.com/FindPlacesNearby?location=${lat}%2C${lng}&language=en&radius=${placeRadius}&type=${searchType}`,
             {
@@ -25,7 +29,6 @@ function MapSearch(props) {
                 'x-rapidapi-host': 'trueway-places.p.rapidapi.com'
               }
             });
-
           if (!response.ok) {
             throw new Error("Oh no! Something is wrong!")
           }
@@ -36,20 +39,6 @@ function MapSearch(props) {
         }
   };
 
-  // function EditTicketForm (props) {
-  //   const { ticket } = props;
-  //   const firestore = useFirestore();
-  
-  //   function handleEditTicketFormSubmission(event) {
-  //     event.preventDefault();
-  //     props.onEditTicket();
-  //     const propertiesToUpdate = {
-  //       names: event.target.names.value,
-  //       location: event.target.location.value,
-  //       issue: event.target.issue.value
-  //     }
-  //     return firestore.update({collection: 'tickets', doc: ticket.id }, propertiesToUpdate)
-  //   }
   useEffect(() => {
     if (selectedPlace !== '') {
         console.log("selected lat jsons parse.name: " + (JSON.parse(selectedPlace)).location.lat);
@@ -57,11 +46,10 @@ function MapSearch(props) {
           name: (JSON.parse(selectedPlace)).name|| null,
           latitude: (JSON.parse(selectedPlace)).location.lat || null,
           longitude: (JSON.parse(selectedPlace)).location.lng || null,
-          type: searchType || null
+          type: searchType || null,
+          matchingTripId: (JSON.parse(mainTripSelection)).id || null,
+          activityDayOfTrip: (JSON.parse(tripDayToAddFoundPlace)) || null
         }
-
-        // firestore.update({collection: 'mainTrips', doc: })
-
         );
     }
   }, [selectedPlace])
@@ -85,17 +73,33 @@ function MapSearch(props) {
         { searchResults && (
           <div>
             <h1>Nearby {searchType}s</h1>
-        {searchResults.map((nearbyResults, index, origArray) => (
-            <div key={index}>
-              <h2>{nearbyResults.name}</h2>
-              <h3>{nearbyResults.address}</h3>
-              <p>Phone Number: {nearbyResults.phone_number}</p>
-              <p><a href={nearbyResults.website}>{nearbyResults.website}</a></p>
-              <p>Distance from location: {nearbyResults.distance} meters</p>
-              <p>Lat: {nearbyResults.location.lat} long: {nearbyResults.location.lng}</p>
-              <button onClick={(e) =>{setSelectedPlace(e.target.value)}} value={JSON.stringify(origArray[index])}>Add to trip</button>
-            </div>
-          ))}
+            {searchResults.map((nearbyResults, index, origArray) => (
+              <div key={index}>
+                <h2>{nearbyResults.name}</h2>
+                <h3>{nearbyResults.address}</h3>
+                <p>Phone Number: {nearbyResults.phone_number}</p>
+                <p><a href={nearbyResults.website}>{nearbyResults.website}</a></p>
+                <p>Distance from location: {nearbyResults.distance} meters</p>
+                <p>Lat: {nearbyResults.location.lat} long: {nearbyResults.location.lng}</p>
+                <p>Main Trip Selection: {JSON.parse(mainTripSelection).tripDays[0].adventureStop}</p>
+                <p>Main Trip Selection: {JSON.parse(mainTripSelection).numberOfDays}</p>
+                {/* <p>Main Trip Selection: {JSON.parse(mainTripSelection)}</p> */}
+                
+                <label>Adventure Stop</label>
+                  <input
+                    name="addToWhichTripDay"
+                    className="form-control"
+                    label="addToWhichTripDay"
+                    variant="filled"
+                    min= "0"
+                    max={JSON.parse(mainTripSelection).numberOfDays}
+                    placeholder={JSON.parse(mainTripSelection).numberOfDays}
+                    value={tripDayToAddFoundPlace}
+                    onChange={event => setTripDayToAddFoundPlace(event.target.value)}
+                  />
+                <button onClick={(e) =>{setSelectedPlace(e.target.value)}} value={JSON.stringify(origArray[index])}>Add to trip</button>
+              </div>
+            ))}
           </div>
         )}
       </div>
