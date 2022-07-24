@@ -52,7 +52,8 @@ class TripControl extends React.Component {
   }
 
   handleChangingSelectedTrip = (id) => {
-    this.props.firestore.get({collection: 'mainTrips', doc: id}).then((trip) => {
+    console.log("changing selected trip");
+    this.props.firestore.get({collection: 'mainTrip', doc: id}).then((trip) => {
       const firestoreTrip = {
         tripName: trip.get("tripName"),
         startDate: trip.get("startDate"),
@@ -61,12 +62,13 @@ class TripControl extends React.Component {
         wayPoints: trip.get("wayPoints"),
         id: trip.id
       }
+      console.log("Firestoretrip: " + firestoreTrip);
       this.setState({selectedTrip: firestoreTrip });
     });
   }
 
   handleDeletingTrip = (id) => {
-    this.props.firestore.delete({collection: 'mainTrips', doc: id});
+    this.props.firestore.delete({collection: 'mainTrip', doc: id});
     this.setState({selectedTrip: null});
   }
 
