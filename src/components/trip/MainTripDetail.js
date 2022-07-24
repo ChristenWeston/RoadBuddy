@@ -7,12 +7,12 @@ import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 function MainTripDetail(props){
   useFirestoreConnect([
     { collection: 'mainTrip' },
-    { collection: 'trip'}
+    { collection: 'trips'}
   ]);
 
   const mainTrip = useSelector(state => state.firestore.ordered.mainTrip);
-  const tripLocations = useSelector(state => state.firestore.ordered.trip);
-  if (isLoaded(mainTrip)) {
+  const tripLocations = useSelector(state => state.firestore.ordered.trips);
+  if (isLoaded(mainTrip) && isLoaded(tripLocations)) {
     return (
       <React.Fragment>
         <hr/>
@@ -26,6 +26,7 @@ function MainTripDetail(props){
             numberOfDays={trip.tripDays.length}
             wayPoints={trip.wayPoints}
             tripDays={trip.tripDays}
+            activities={JSON.stringify(tripLocations)}
             id={trip.id}
             key={trip.id}/>
         })}
@@ -42,6 +43,7 @@ function MainTripDetail(props){
 
 MainTripDetail.propTypes = {
   onTripSelection: PropTypes.func,
+  onActivities: PropTypes.func,
   onClickingEdit: PropTypes.func
 };
 
