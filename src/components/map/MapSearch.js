@@ -24,8 +24,7 @@ function MapSearch(props) {
                 'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY,
                 'x-rapidapi-host': 'trueway-places.p.rapidapi.com'
               }
-            }
-          );
+            });
 
           if (!response.ok) {
             throw new Error("Oh no! Something is wrong!")
@@ -36,9 +35,23 @@ function MapSearch(props) {
           return data.results;
         }
   };
+
+  // function EditTicketForm (props) {
+  //   const { ticket } = props;
+  //   const firestore = useFirestore();
+  
+  //   function handleEditTicketFormSubmission(event) {
+  //     event.preventDefault();
+  //     props.onEditTicket();
+  //     const propertiesToUpdate = {
+  //       names: event.target.names.value,
+  //       location: event.target.location.value,
+  //       issue: event.target.issue.value
+  //     }
+  //     return firestore.update({collection: 'tickets', doc: ticket.id }, propertiesToUpdate)
+  //   }
   useEffect(() => {
     if (selectedPlace !== '') {
-        // console.log("selected lat jsons parse.name: " + (JSON.parse(selectedPlace.location)).lat);
         console.log("selected lat jsons parse.name: " + (JSON.parse(selectedPlace)).location.lat);
           firestore.collection("trips").add({
           name: (JSON.parse(selectedPlace)).name|| null,
@@ -46,6 +59,9 @@ function MapSearch(props) {
           longitude: (JSON.parse(selectedPlace)).location.lng || null,
           type: searchType || null
         }
+
+        // firestore.update({collection: 'mainTrips', doc: })
+
         );
     }
   }, [selectedPlace])
@@ -85,7 +101,6 @@ function MapSearch(props) {
       </div>
     </div>
     </React.Fragment>
-  )
-}
+  )}
 
 export default MapSearch;

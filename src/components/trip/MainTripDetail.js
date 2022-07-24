@@ -25,6 +25,7 @@ function MainTripDetail(props){
             endDate={trip.endDate}
             numberOfDays={trip.tripDays.length}
             wayPoints={trip.wayPoints}
+            tripDays={trip.tripDays}
             id={trip.id}
             key={trip.id}/>
         })}

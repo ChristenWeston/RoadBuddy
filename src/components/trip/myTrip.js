@@ -21,6 +21,7 @@ MyTrip.propTypes = {
   endDate: PropTypes.string,
   numberOfDays: PropTypes.number,
   wayPoints: PropTypes.string,
+  tripDays: PropTypes.array,
   id: PropTypes.string,
   whenTripClicked: PropTypes.func
 };

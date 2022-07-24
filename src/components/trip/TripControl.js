@@ -60,6 +60,7 @@ class TripControl extends React.Component {
         endDate: trip.get("endDate"),
         numberOfDays: trip.get("numberOfDays"),
         wayPoints: trip.get("wayPoints"),
+        tripDays: trip.get("tripDays"),
         id: trip.id
       }
       console.log("Firestoretrip: " + firestoreTrip);

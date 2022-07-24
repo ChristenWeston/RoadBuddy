@@ -18,7 +18,7 @@ function App(){
     <React.Fragment>
         <Router>
           <Header />
-          {/* <div className="d-flex flex-row"> */}
+          <div className="d-flex flex-row">
           {/* <ReusableForm /> */}
           {/* <Sidebar /> */}
           {/* <TripControl /> */}
@@ -28,8 +28,7 @@ function App(){
                     <Map />
                 </div>
             </div> */}
-            {/* </div> */}
-          {/* <MapSearch /> */}
+          </div>
           <div className ="form-group row">
             <div className="col-sm-10">
               <Switch>
@@ -37,11 +36,10 @@ function App(){
                   <Signin />
                 </Route>
                 <Route path="/start">
-                  <ReusableForm />
+                  {/* <ReusableForm /> */}
                 </Route>
                 <Route path="/">
-                  {/* <TripControl /> */}
-                  {/* <ReusableForm /> */}
+                  <TripControl />
                 </Route>
 
             </Switch>

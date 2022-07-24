@@ -12,8 +12,10 @@ const ReusableForm = () => {
   const [endDate, setEndDate] = useState("");
   const [numberOfDays, setNumberOfDays] = useState("");
   const [wayPoints, setWaypoints] = useState("");
+  console.log("In reusable form");
 
   function addNewTrip(event) {
+    console.log("Add new trip");
     event.preventDefault();
 
     return firestore.collection("mainTrip").add({
@@ -82,8 +84,7 @@ const ReusableForm = () => {
           name="numberOfDays"
           placeholder="Trip length (days)"
           value={numberOfDays}
-          onChange={(e) => setNumberOfDays(e.target.value)}
-           />
+          onChange={(e) => setNumberOfDays(e.target.value)} />
         <input 
           type="number"
           className="form-control"

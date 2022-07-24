@@ -24,7 +24,7 @@ function Signin(){
     const password = event.target.signinPassword.value;
     
     firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
-      console.log("Signed in!");
+      console.log("Signed in user: ");
       history.push("/");
      }).catch(function(error) {
       console.log(error.message);
@@ -45,35 +45,35 @@ function Signin(){
       <form onSubmit={doSignUp}>
           <input
             type='text'
-            class='form-control-plaintext'
+            className='form-control-plaintext'
             name='email'
             placeholder='email' />
 
           <input
             type='password'
-            class='form-control-plaintext'
+            className='form-control-plaintext'
             name='password'
             placeholder='Password' />
-          <button type='submit' class="btn btn-primary">Sign up</button>
+          <button type='submit' className="btn btn-primary">Sign up</button>
       </form>
 
       <h1>Sign In</h1>
       <form onSubmit={doSignIn}>
         <input
           type='text'
-          class='form-control-plaintext'
+          className='form-control-plaintext'
           name='signinEmail'
           placeholder='email' />
         <input
           type='password'
-          class='form-control-plaintext'
+          className='form-control-plaintext'
           name='signinPassword'
           placeholder='Password' />
-        <button type='submit' class="btn btn-primary">Sign in</button>
+        <button type='submit' className="btn btn-primary">Sign in</button>
       </form>
 
       <h1>Sign Out</h1>
-      <button onClick={doSignOut} class="btn btn-warning">Sign out</button>
+      <button onClick={doSignOut} className="btn btn-warning">Sign out</button>
     </React.Fragment>
   );
 }
