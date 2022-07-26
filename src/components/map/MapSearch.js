@@ -81,8 +81,6 @@ function MapSearch(props) {
                 <p><a href={nearbyResults.website}>{nearbyResults.website}</a></p>
                 <p>Distance from location: {nearbyResults.distance} meters</p>
                 <p>Lat: {nearbyResults.location.lat} long: {nearbyResults.location.lng}</p>
-                <p>Main Trip Selection: {JSON.parse(mainTripSelection).tripDays[0].adventureStop}</p>
-                <p>Main Trip Selection: {JSON.parse(mainTripSelection).numberOfDays}</p>
                 {/* <p>Main Trip Selection: {JSON.parse(mainTripSelection)}</p> */}
                 
                 <label>Adventure Stop</label>
@@ -92,8 +90,8 @@ function MapSearch(props) {
                     label="addToWhichTripDay"
                     variant="filled"
                     min= "0"
-                    max={JSON.parse(mainTripSelection).numberOfDays}
-                    placeholder={JSON.parse(mainTripSelection).numberOfDays}
+                    max={JSON.parse(mainTripSelection).tripDays.length}
+                    placeholder={JSON.parse(mainTripSelection).tripDays.length}
                     value={tripDayToAddFoundPlace}
                     onChange={event => setTripDayToAddFoundPlace(event.target.value)}
                   />
