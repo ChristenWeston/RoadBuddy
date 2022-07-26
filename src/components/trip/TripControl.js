@@ -61,6 +61,8 @@ class TripControl extends React.Component {
         tripName: trip.get("tripName"),
         startDate: trip.get("startDate"),
         endDate: trip.get("endDate"),
+        startLocation: trip.get("startLocation"),
+        endLocation: trip.get("endLocation"),
         numberOfDays: trip.get("numberOfDays"),
         wayPoints: trip.get("wayPoints"),
         tripDays: trip.get("tripDays"),
@@ -111,6 +113,11 @@ class TripControl extends React.Component {
     console.log("Adding adventure time");
   }
 
+  handleShowMap = () => {
+    this.setState({mapSearchVisible: true});
+    console.log("Show me that map!");
+  }
+
   render(){
     const auth = this.props.firebase.auth();
     if (!isLoaded(auth)) {
@@ -144,7 +151,7 @@ class TripControl extends React.Component {
           onClickingDelete = {this.handleDeletingTrip} 
           onClickingEdit = {this.handleEditClick} 
           onClickingAddAdventure = {this.handleAddingAdventure}
-          onClickingAddFood = {this.handleAddingFood}/>
+          onClickingShowMap = {this.handleShowMap}/>
         buttonText = "Return to My Trips";
       } else if (this.state.selectedTrip != null && this.state.mapSearchVisible != null) {
         currentlyVisibleState = 
@@ -154,7 +161,7 @@ class TripControl extends React.Component {
           onClickingDelete = {this.handleDeletingTrip} 
           onClickingEdit = {this.handleEditClick} 
           onClickingAddAdventure = {this.handleAddingAdventure}
-          onClickingAddFood = {this.handleAddingFood}/>
+          onClickingShowMap = {this.handleShowMap}/>
           <div id="mapContainer">
             <div id="mapClipPath">
               <Map theMainTripSelection= {this.state.selectedTrip}/>

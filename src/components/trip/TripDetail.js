@@ -40,7 +40,7 @@ function TripDetail(props){
         </div>
       ))}
       <button onClick={ props.onClickingAddAdventure }>Add Stop To Trip</button>
-      {/* <button onClick={ props.onClickingAddFood }>Add Food Stop</button> */}
+      <button onClick={ props.onClickingShowMap }>Show me the map!</button>
       <button onClick={ props.onClickingEdit }>Update Trip</button>
       <button onClick={()=> onClickingDelete(trip.id) }>Delete trip</button>
       <hr/>
