@@ -10,6 +10,8 @@ const ReusableForm = () => {
   const [tripName, setTripName] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [startLocation, setStartLocation] = useState("");
+  const [endLocation, setEndLocation] = useState("");
   const [numberOfDays, setNumberOfDays] = useState("");
   const [wayPoints, setWaypoints] = useState("");
   console.log("In reusable form");
@@ -22,6 +24,8 @@ const ReusableForm = () => {
       tripName: tripName,
       startDate: startDate,
       endDate: endDate,
+      startLocation: startLocation,
+      endLocation: endLocation,
       numberOfDays: numberOfDays,
       wayPoints: wayPoints,
       tripDays: inputFields,
@@ -78,6 +82,20 @@ const ReusableForm = () => {
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)} />
         <input
+          type="text"
+          className="form-control"
+          name="startLocation"
+          placeholder="Starting location"
+          value={startLocation}
+          onChange={(e) => setStartLocation(e.target.value)} />
+        <input
+          type="text"
+          className="form-control"
+          name="endLocation"
+          placeholder="Ending location" 
+          value={endLocation}
+          onChange={(e) => setEndLocation(e.target.value)}/>
+        <input
           type="number"
           className="form-control"
           min={1}
@@ -93,7 +111,6 @@ const ReusableForm = () => {
           placeholder="Number of stops along trip" 
           value={wayPoints}
           onChange={(e) => setWaypoints(e.target.value)}/>
-
         { inputFields.map(inputField => (
           <div key={inputField.id}>
             <label>Food Stop</label>
@@ -121,7 +138,7 @@ const ReusableForm = () => {
           </div>
         )) }
           <br />
-        	<button className="btn btn-primary btn-lg" onClick={addNewTrip}>Save trip</button>
+        	<button className="btn btn-primary btn-lg" onSubmit={addNewTrip}>Save trip</button>
       </form>
     </React.Fragment>
   );
