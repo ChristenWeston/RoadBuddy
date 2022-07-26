@@ -21,28 +21,26 @@ function TripDetail(props){
       <h3>{trip.tripName}</h3>
       {thisTripsActivities && (
         <div>
+          <h1>We got activities</h1>
           {thisTripsActivities.map((activity, index) => (
             <div key={index}>
-              <h1>We got activities</h1>
                 <h2>{activity.name}</h2>
               </div>
           ))}
         </div>
       )}
       <p><em>{trip.startDate} - {trip.endDate}</em></p>
-      <p>Activities: {JSON.stringify(tripLocations)}</p>
+      {/* <p>Activities: {JSON.stringify(tripLocations)}</p> */}
       {trip.tripDays.map((tripDays, index) => (
         <div key={tripDays.id}>
           <h4>Trip Day {index + 1}</h4>
           <p>ID: {tripDays.id}</p>
           <p>Adventure stop: {tripDays.adventureStop}</p>
-          <button onClick={ props.onClickingAddAdventure }>Add Adventure Stop</button>
           <p>Food stop: {tripDays.foodStop}</p>
-          
-          <button onClick={ props.onClickingAddFood }>Add Food Stop</button>
         </div>
       ))}
-
+      <button onClick={ props.onClickingAddAdventure }>Add Stop To Trip</button>
+      {/* <button onClick={ props.onClickingAddFood }>Add Food Stop</button> */}
       <button onClick={ props.onClickingEdit }>Update Trip</button>
       <button onClick={()=> onClickingDelete(trip.id) }>Delete trip</button>
       <hr/>
