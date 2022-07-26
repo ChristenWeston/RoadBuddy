@@ -400,14 +400,15 @@ function MapComponent(props) {
         }, [clickedPos])
       
       async function calculateRoute() {
-        if (originRef.current.value === '' || destiantionRef.current.value === '') {
-          return
-        }
+        console.log("calculating route: " + (JSON.stringify(theMainTripSelection)));
+        // if (originRef.current.value === '' || destiantionRef.current.value === '') {
+        //   return
+        // }
         // eslint-disable-next-line no-undef
         const directionsService = new google.maps.DirectionsService()
         const results = await directionsService.route({
-          origin: originRef.current.value,
-          destination: destiantionRef.current.value,
+          origin: theMainTripSelection.startLocation,
+          destination: theMainTripSelection.endLocation,
           waypoints: [
             {
               location: 'Joplin, MO',
@@ -426,14 +427,14 @@ function MapComponent(props) {
         setDuration(results.routes[0].legs[0].duration.text)
       }
       
-      function clearRoute() {
-        setDirectionsResponse(null)
-        setDistance('')
-        setDuration('')
-        originRef.current.value = ''
-        destiantionRef.current.value = ''
-        waypointsRef.current.value = ''
-      }
+    //   function clearRoute() {
+    //     setDirectionsResponse(null)
+    //     setDistance('')
+    //     setDuration('')
+    //     originRef.current.value = ''
+    //     destiantionRef.current.value = ''
+    //     waypointsRef.current.value = ''
+    //   }
 
     return (
         <GoogleMap 
@@ -530,12 +531,12 @@ function MapComponent(props) {
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}
-          <input type='text' placeholder='Origin' ref={originRef} />
+          {/* <input type='text' placeholder='Origin' ref={originRef} />
           <input
             type='text'
             placeholder='Destination'
             ref={destiantionRef}
-            />
+            /> */}
           <input
             type='text'
             placeholder='Waypoints'
