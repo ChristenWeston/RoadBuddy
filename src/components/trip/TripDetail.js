@@ -14,23 +14,22 @@ function TripDetail(props) {
   const { trip, onClickingDelete, activities } = props;
 
   if (isLoaded(tripLocations)) {
-    var thisTripsActivities = tripLocations.filter(activitiy => activitiy.matchingTripId == trip.id);
+    var thisTripsActivities = tripLocations.filter(activity => activity.matchingTripId == trip.id);
     console.log("this trip activities: " + thisTripsActivities);
     return (
       <React.Fragment>
         <h1>Trip Detail</h1>
-        <h3>{trip.tripName}</h3>
+        <h2>{trip.tripName}</h2>
         <p><em>{trip.startDate} - {trip.endDate}</em></p>
         {trip.tripDays.map((tripDays, index) => (
           <div key={tripDays.id}>
-            <h4>Trip Day {index + 1}</h4>
+            <h3>Trip Day {index + 1}</h3>
             {thisTripsActivities!= '' && (
               <div>
-                <h1>Activity</h1>
+                <h4>Activity</h4>
                 {thisTripsActivities.filter(todaysActivity => todaysActivity.activityDayOfTrip == (index + 1)).map((activity, index2) => (
                   <div key={index2}>
-                    <h2>{activity.name}</h2>
-                    <p>{index}</p>
+                    <h5>{activity.name}</h5>
                   </div>
                 ))}
               </div>
