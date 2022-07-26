@@ -15,27 +15,16 @@ function TripDetail(props) {
 
   if (isLoaded(tripLocations)) {
     var thisTripsActivities = tripLocations.filter(activitiy => activitiy.matchingTripId == trip.id);
+    console.log("this trip activities: " + thisTripsActivities);
     return (
       <React.Fragment>
         <h1>Trip Detail</h1>
         <h3>{trip.tripName}</h3>
-        {thisTripsActivities && (
-          <div>
-            <h1>We got activities</h1>
-            {thisTripsActivities.map((activity, index) => (
-              <div key={index}>
-                <h2>{activity.name}</h2>
-                <p>Activity day of trip {activity.activityDayOfTrip}</p>
-              </div>
-            ))}
-          </div>
-        )}
         <p><em>{trip.startDate} - {trip.endDate}</em></p>
-        {/* <p>Activities: {JSON.stringify(tripLocations)}</p> */}
         {trip.tripDays.map((tripDays, index) => (
           <div key={tripDays.id}>
             <h4>Trip Day {index + 1}</h4>
-            {thisTripsActivities && (
+            {thisTripsActivities!= '' && (
               <div>
                 <h1>Activity</h1>
                 {thisTripsActivities.filter(todaysActivity => todaysActivity.activityDayOfTrip == (index + 1)).map((activity, index2) => (
