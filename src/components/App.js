@@ -36,7 +36,7 @@ function App(){
                   <Signin />
                 </Route>
                 <Route path="/start">
-                  {/* <ReusableForm /> */}
+                  <ReusableForm />
                 </Route>
                 <Route path="/">
                   <TripControl />

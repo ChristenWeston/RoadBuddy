@@ -6,8 +6,8 @@ function MyTrip(props) {
     <React.Fragment>
       <div onClick = {() => props.whenTripClicked(props.id)}>
         <h3>{props.tripName}</h3>
-        <p>{props.startDate}</p>
-        <p>{props.endDate}</p>
+        <p>{props.startDate} - {props.endDate}</p>
+        <p>Going from {props.startLocation} to {props.endLocation}</p>
         <p>{props.numberOfDays}</p>
         <p>{props.wayPoints}</p>
         <p>{props.activities}</p>

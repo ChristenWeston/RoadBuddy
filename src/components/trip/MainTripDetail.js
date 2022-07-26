@@ -23,10 +23,12 @@ function MainTripDetail(props){
             tripName={trip.tripName}
             startDate={trip.startDate}
             endDate={trip.endDate}
+            startLocation={trip.startLocation}
+            endLocation={trip.endLocation}
             numberOfDays={trip.tripDays.length}
             wayPoints={trip.wayPoints}
             tripDays={trip.tripDays}
-            activities={JSON.stringify(tripLocations)}
+            // activities={JSON.stringify(tripLocations)}
             id={trip.id}
             key={trip.id}/>
         })}

@@ -25,7 +25,9 @@ function MapComponent(props) {
     useFirestoreConnect([
         { collection: 'trips' }
       ]);
-    const allTrips = useSelector((state) => state.firestore.ordered.trips)
+    const allTrips = useSelector((state) => state.firestore.ordered.trips);
+    const onlyThisTripsActivities = allTrips.filter(activity => activity.matchingTripId == theMainTripSelection.id);
+    console.log("Only this trips activities:" + onlyThisTripsActivities);
     useEffect(() => {
         if(allTrips !== null) {
             console.log(JSON.stringify(allTrips));
@@ -36,7 +38,7 @@ function MapComponent(props) {
       { lat: 45.52180183501188, lng: -122.62568532656492 },
       { lat: 45.47710287706964, lng: -122.63684331637737 },
       { lat: 45.52661252732071, lng: -122.67332135870465 },
-      { lat: 45.52180183501188, lng: -122.62568532656492 }
+      { lat: 45.52180183501188, lng: -122.62568532656492 },
     ]
   
     const options = {
@@ -401,9 +403,9 @@ function MapComponent(props) {
       
       async function calculateRoute() {
         console.log("calculating route: " + (JSON.stringify(theMainTripSelection)));
-        // if (originRef.current.value === '' || destiantionRef.current.value === '') {
-        //   return
-        // }
+        if (theMainTripSelection.startLocation === '' || theMainTripSelection.endLocation === '') {
+          return
+        }
         // eslint-disable-next-line no-undef
         const directionsService = new google.maps.DirectionsService()
         const results = await directionsService.route({
@@ -479,7 +481,7 @@ function MapComponent(props) {
                 </InfoWindow>
             )} */}
 
-            {allTrips && (allTrips.map(trip => (
+            {onlyThisTripsActivities && (onlyThisTripsActivities.map(trip => (
                 <Marker 
                     key={trip.id} 
                     position={{
@@ -487,10 +489,11 @@ function MapComponent(props) {
                         lng: parseFloat(trip.longitude)
                     }}
                     icon={{
-                        url: "https://cdn.icon-icons.com/icons2/2435/PNG/512/hotel_service_holiday_journey_icon_147421.png",
+                        url: "https://cdn-icons-png.flaticon.com/512/3468/3468377.png",
+                        //https://cdn.icon-icons.com/icons2/2435/PNG/512/hotel_service_holiday_journey_icon_147421.png
                         //https://i.imgur.com/FpHIBa7.png
                         //https://cdn-icons-png.flaticon.com/512/7880/7880087.png
-                        scaledSize: new window.google.maps.Size(35, 35)
+                        scaledSize: new window.google.maps.Size(55, 35)
                     }}
                     onClick ={() => {
                         setSelectedTrip(trip);
@@ -501,7 +504,7 @@ function MapComponent(props) {
             {selectedTrip && (
                 <InfoWindow
                     position={{
-                        lat: selectedTrip.latitude, 
+                        lat: parseFloat(selectedTrip.latitude), 
                         lng: selectedTrip.longitude
                     }}
                     onCloseClick={() => {
