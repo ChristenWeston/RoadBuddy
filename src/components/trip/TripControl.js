@@ -172,6 +172,7 @@ class TripControl extends React.Component {
       } else if (this.props.formVisibleOnPage) {
         console.log("Form visible on page");
         currentlyVisibleState = <Hotels onNewTripCreation={this.handleAddingNewTripToList}  />;
+        currentlyVisibleState = <ReusableForm onNewTripCreation={this.handleAddingNewTripToList}  />;
         buttonText = "Return to Trip List";
       } else {
         // currentlyVisibleState = <TripList tripList={this.props.mainTripList} onTripSelection={this.handleChangingSelectedTrip} />;
