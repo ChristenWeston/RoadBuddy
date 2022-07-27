@@ -2,10 +2,11 @@ import React, { useState, useContext } from 'react';
 import PropTypes from "prop-types";
 import Trip from "./Trip";
 import {v4 as uuidv4} from "uuid";
-import { useFirestore } from 'react-redux-firebase'
+import { useFirestore } from 'react-redux-firebase';
+import { useHistory } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 
-const ReusableForm = () => {
+const ReusableForm = (props) => {
   const firestore = useFirestore();
   const [tripName, setTripName] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -14,11 +15,13 @@ const ReusableForm = () => {
   const [endLocation, setEndLocation] = useState("");
   const [numberOfDays, setNumberOfDays] = useState("");
   const [wayPoints, setWaypoints] = useState("");
+  const history = useHistory();
   console.log("In reusable form");
 
   function addNewTrip(event) {
+    props.onNewTripCreation();
     console.log("Add new trip");
-    event.preventDefault();
+    // event.preventDefault();
 
     return firestore.collection("mainTrip").add({
       tripName: tripName,
@@ -28,9 +31,10 @@ const ReusableForm = () => {
       endLocation: endLocation,
       numberOfDays: numberOfDays,
       wayPoints: wayPoints,
-      tripDays: inputFields,
+      tripDays: inputFields || null,
       dateEntered: firestore.FieldValue.serverTimestamp()
     });
+
   }
 
   const [inputFields, setInputFields] = useState([
@@ -111,7 +115,7 @@ const ReusableForm = () => {
           placeholder="Number of stops along trip" 
           value={wayPoints}
           onChange={(e) => setWaypoints(e.target.value)}/>
-        { inputFields.map(inputField => (
+        {/* { inputFields.map(inputField => (
           <div key={inputField.id}>
             <label>Food Stop</label>
             <input
@@ -136,7 +140,7 @@ const ReusableForm = () => {
             <button className="btn btn-warning btn-sm" disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>Remove Day</button>
             <button className="btn btn-light btn-sm" onClick={handleAddFields}>Add day</button>
           </div>
-        )) }
+        )) } */}
           <br />
         	<button className="btn btn-primary btn-lg" onSubmit={addNewTrip}>Save trip</button>
       </form>
