@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useContext, useMemo } from "react";
 import { useFirestore } from 'react-redux-firebase';
+import useFetch from '../shared/useFetch';
 import { doc, setDoc, updateDoc, collection, addDoc } from "firebase/firestore";
 
 function MapSearch(props) {
@@ -8,15 +9,14 @@ function MapSearch(props) {
   const theLocation = props.theClickedCurrentPos;
   const placeRadius = 4500;
   const mainTripSelection = props.theMainTripSelection;
-  const [searchType, setSearchType] = useState('')
+  const [searchType, setSearchType] = useState('');
   const [searchResults, setSearchResults] = useState(null)
   const [selectedPlace, setSelectedPlace] = useState('');
   const [selectedIndex, setSelectedIndex] = useState('');
-  const [tripDayToAddFoundPlace, setTripDayToAddFoundPlace] = useState('')
+  const [tripDayToAddFoundPlace, setTripDayToAddFoundPlace] = useState('');
 
   const fetchNearbyPlaces =  async (theLocation, placeRadius, searchType) => {
-        if (theLocation !== '{}' && theLocation !== null && searchType !== '') {
-          console.log("The Location is not null" + JSON.parse(theLocation).lat);
+        if (theLocation !== '{}' && theLocation !== null && searchType !== '' && searchType !== 'hotel') {
           var lat = JSON.parse(theLocation).lat;
           var lng = JSON.parse(theLocation).lng;
           console.log("Fetch nearby places" + JSON.parse(mainTripSelection).tripName + " mainTripSelectionDays" + JSON.parse(mainTripSelection).tripDays[0].adventureStop + JSON.parse(mainTripSelection).numberOfDays);
@@ -34,9 +34,12 @@ function MapSearch(props) {
           }
           const data = await response.json();
           setSearchResults(data.results);
-          console.log(data.results[0])
           return data.results;
         }
+        // ToDo Hotel search time
+      else if (theLocation !== '{}' && theLocation !== null && searchType === 'hotel') {
+        console.log("Hotel search time");
+      }
   };
 
   useEffect(() => {
@@ -66,6 +69,7 @@ function MapSearch(props) {
         <option value="tourist_attraction">Touristy places</option>
         <option value="store">Stores</option>
         <option value="restaurant">Restaurants</option>
+        <option value="hotel">Hotels</option>
       </select>
       <button onClick={() => {fetchNearbyPlaces(theLocation, placeRadius, searchType)}}>Search!</button>
       <p>{props.theClickedCurrentPos}</p>

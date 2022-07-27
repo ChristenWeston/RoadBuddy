@@ -410,15 +410,24 @@ function MapComponent(props) {
         const results = await directionsService.route({
             origin: theMainTripSelection.startLocation,
             destination: theMainTripSelection.endLocation,
-            waypoints: [
-                {
-                    location: 'Joplin, MO',
-                    stopover: false
-                }, {
-                    location: 'Oklahoma City, OK',
-                    stopover: true
-                }],
-            optimizeWaypoints: true,
+            // waypoints: [
+            //     {
+            //         location: new window.google.maps.LatLng(46.5, -123.5),
+            //         stopover: true
+            //     }, {
+            //         location: 'Oklahoma City, OK',
+            //         stopover: true
+            //     }],
+            // ToDo pull waypoints from here
+            // waypoints: [
+            // onlyThisTripsActivities.map((latLng, index) => (
+            //     {
+            //         location: (parseFloat(latLng.latitude), parseFloat(latLng.longitude)),
+            //         stopover: true
+            //     }
+            // ) )
+            // ],
+            // optimizeWaypoints: true,
             // eslint-disable-next-line no-undef
             travelMode: google.maps.TravelMode.DRIVING,
         })
@@ -553,7 +562,6 @@ function MapComponent(props) {
                 theMainTripSelection={JSON.stringify(theMainTripSelection)}
             />
         </GoogleMap>
-
     )
 }
 
@@ -568,7 +576,6 @@ function Map(props) {
             mapElement={<div style={{ height: "100%" }} />}
             theMainTripSelection={props.theMainTripSelection}
         />
-
     )
 }
 
