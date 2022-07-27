@@ -6,7 +6,7 @@ function MapSearch(props) {
   // const theLocation = useContext(CurrentPosition);
   const firestore = useFirestore(); 
   const theLocation = props.theClickedCurrentPos;
-  const placeRadius = 2500;
+  const placeRadius = 4500;
   const mainTripSelection = props.theMainTripSelection;
   const [searchType, setSearchType] = useState('')
   const [searchResults, setSearchResults] = useState(null)
