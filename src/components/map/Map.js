@@ -16,7 +16,6 @@ import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import MapSearch, { MapSearchResults } from "./MapSearch";
 
-
 function MapComponent(props) {
     const [selectedProperty, setSelectedProperty] = useState(null);
     const [selectedTrip, setSelectedTrip] = useState(null);
@@ -27,7 +26,7 @@ function MapComponent(props) {
       ]);
     const allTrips = useSelector((state) => state.firestore.ordered.trips);
     const onlyThisTripsActivities = allTrips.filter(activity => activity.matchingTripId == theMainTripSelection.id);
-    console.log("Only this trips activities:" + onlyThisTripsActivities);
+
     useEffect(() => {
         if(allTrips !== null) {
             console.log(JSON.stringify(allTrips));
@@ -440,8 +439,8 @@ function MapComponent(props) {
 
     return (
         <GoogleMap 
-            defaultZoom={12}
-            defaultCenter={{ lat: 45.50369791922873, lng: -122.58457242648787 }}
+            defaultZoom={5}
+            defaultCenter={{ lat: 40.732386, lng: -98.059036 }}
             defaultOptions={{styles: mapStyles }}
             onClick={onMapClick}
             theMainTripSelection = {props.theMainTripSelection}
