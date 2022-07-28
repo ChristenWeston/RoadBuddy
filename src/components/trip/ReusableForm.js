@@ -72,7 +72,6 @@ const ReusableForm = (props) => {
           onChange={(e) => setTripName(e.target.value)} />
         <input required
           type="date"
-          dateFormat="mm/dd/yyyy"
           className="form-control"
           name="startDate"
           placeholder="First day of trip" 
