@@ -87,7 +87,7 @@ function MapSearch(props) {
                 <p>Lat: {nearbyResults.location.lat} long: {nearbyResults.location.lng}</p>
                 {/* <p>Main Trip Selection: {JSON.parse(mainTripSelection)}</p> */}
                 
-                <label>Adventure Stop</label>
+                <label>Day of Trip</label>
                   <input
                     name="addToWhichTripDay"
                     className="form-control"
