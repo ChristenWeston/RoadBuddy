@@ -155,14 +155,16 @@ class TripControl extends React.Component {
         buttonText = "Return to My Trips";
       } else if (this.state.selectedTrip != null && this.state.mapSearchVisible != null) {
         currentlyVisibleState = 
-        <div>
-          <TripDetail trip = {this.state.selectedTrip}
-          activities = {this.state.selectedActivity}
-          onClickingDelete = {this.handleDeletingTrip} 
-          onClickingEdit = {this.handleEditClick} 
-          onClickingAddAdventure = {this.handleAddingAdventure}
-          onClickingShowMap = {this.handleShowMap}/>
-          <div id="mapContainer">
+        <div className="d-flex flex-row bd-highlight mb-3">
+          <div>
+            <TripDetail trip = {this.state.selectedTrip}
+            activities = {this.state.selectedActivity}
+            onClickingDelete = {this.handleDeletingTrip} 
+            onClickingEdit = {this.handleEditClick} 
+            onClickingAddAdventure = {this.handleAddingAdventure}
+            onClickingShowMap = {this.handleShowMap}/>
+          </div>
+          <div className="p-2 bd-highlight" id="mapContainer">
             <div id="mapClipPath">
               <Map theMainTripSelection= {this.state.selectedTrip}/>
             </div>
