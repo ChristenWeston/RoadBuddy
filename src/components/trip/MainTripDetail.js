@@ -16,6 +16,7 @@ function MainTripDetail(props){
     return (
       <React.Fragment>
         <hr/>
+        <div class="container">
         <h1>My Trips</h1>
         {mainTrip.map((trip) => {
           return <MyTrip
@@ -32,6 +33,7 @@ function MainTripDetail(props){
             id={trip.id}
             key={trip.id}/>
         })}
+        </div>
       </React.Fragment>
     );
   } else {

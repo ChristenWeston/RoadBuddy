@@ -142,7 +142,9 @@ const ReusableForm = (props) => {
         )) }
           <br />
         	<button className="btn btn-primary btn-lg" onSubmit={addNewTrip}>Save trip</button>
+          <br />
       </form>
+      <br />
     </React.Fragment>
   );
 }
