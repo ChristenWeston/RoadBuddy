@@ -18,40 +18,42 @@ function TripDetail(props) {
     console.log("this trip activities: " + thisTripsActivities);
     return (
       <React.Fragment>
-        <h1>Trip Detail</h1>
-        <h2>{trip.tripName}</h2>
-        <p><em>{trip.startDate} - {trip.endDate}</em></p>
-        {/* <div key={tripDays.id} className="card border-secondary mb-3" style={{maxWidth: `20rem`}}>
+        <div class="container">
+          <h1>Trip Detail</h1>
+          <h2>{trip.tripName}</h2>
+          <p><em>{trip.startDate} - {trip.endDate}</em></p>
+          {/* <div key={tripDays.id} className="card border-secondary mb-3" style={{maxWidth: `20rem`}}>
           <div className="card-header">Header</div>
             <div className="card-body">
               <h4 className="card-title">Secondary card title</h4>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
         </div> */}
-        
-        {trip.tripDays.map((tripDays, index) => (
-          <div key={tripDays.id}>
-          <h3>Trip Day {index + 1}</h3>
-          <div  className="card border-secondary mb-3" style={{maxWidth: `20rem`}}>
-            <div className="card-header">Trip Day {index + 1}</div>
-            {thisTripsActivities!= '' && (
-              <div>
-                <h4>Activity</h4>
-                {thisTripsActivities.filter(todaysActivity => todaysActivity.activityDayOfTrip == (index + 1)).map((activity, index2) => (
-                  <div key= {index2} className="card-body">
-                    <h4 className="card-title">{activity.name}</h4>
-                    <p className="card-text">{activity.type}</p>
+
+          {trip.tripDays.map((tripDays, index) => (
+            <div key={tripDays.id}>
+              <h3>Trip Day {index + 1}</h3>
+              <div className="card border-secondary mb-3" style={{ maxWidth: `20rem` }}>
+                <div className="card-header">Trip Day {index + 1}</div>
+                {thisTripsActivities != '' && (
+                  <div>
+                    <h4>Activity</h4>
+                    {thisTripsActivities.filter(todaysActivity => todaysActivity.activityDayOfTrip == (index + 1)).map((activity, index2) => (
+                      <div key={index2} className="card-body">
+                        <h4 className="card-title">{activity.name}</h4>
+                        <p className="card-text">{activity.type}</p>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                )}
               </div>
-            )}
-          </div>
-          </div>
-        ))}
-        <button onClick={props.onClickingAddAdventure}>Add Stop To Trip</button>
-        <button onClick={props.onClickingShowMap}>Show me the map!</button>
-        <button onClick={props.onClickingEdit}>Update Trip</button>
-        <button onClick={() => onClickingDelete(trip.id)}>Delete trip</button>
+            </div>
+          ))}
+          <button className="btn btn-primary" onClick={props.onClickingAddAdventure}>Add Stop To Trip</button>
+          <button className="btn btn-primary" onClick={props.onClickingShowMap}>Show me the map!</button>
+          <button className="btn btn-primary" onClick={props.onClickingEdit}>Update Trip</button>
+          <button className="btn btn-warning" onClick={() => onClickingDelete(trip.id)}>Delete trip</button>
+        </div>
         <hr />
       </React.Fragment>
     );
