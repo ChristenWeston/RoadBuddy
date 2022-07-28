@@ -548,11 +548,11 @@ function MapComponent(props) {
             placeholder='Destination'
             ref={destiantionRef}
             /> */}
-            <input
+            {/* <input
                 type='text'
                 placeholder='Waypoints'
                 ref={waypointsRef}
-            />
+            /> */}
             <button colorscheme='pink' type='submit' onClick={calculateRoute}>
                 Calculate Route
             </button>

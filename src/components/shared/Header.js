@@ -1,5 +1,4 @@
 import React from "react";
-import mapImage from "./../../img/map.png";
 import { Link } from "react-router-dom";
 
 function Header() {
@@ -30,6 +29,7 @@ function Header() {
           </div>
         </div>
       </nav>
+      <br />
     </React.Fragment>
 
   );

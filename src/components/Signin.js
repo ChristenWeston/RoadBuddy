@@ -41,6 +41,8 @@ function Signin(){
 
   return (
     <React.Fragment>
+      <div class="container">
+      <div className="text-center">
       <h1>Sign up</h1>
       <form onSubmit={doSignUp}>
           <input
@@ -56,7 +58,8 @@ function Signin(){
             placeholder='Password' />
           <button type='submit' className="btn btn-primary">Sign up</button>
       </form>
-
+</div>
+<div className="text-center">
       <h1>Sign In</h1>
       <form onSubmit={doSignIn}>
         <input
@@ -71,9 +74,12 @@ function Signin(){
           placeholder='Password' />
         <button type='submit' className="btn btn-primary">Sign in</button>
       </form>
-
+      </div>
+      <div className="text-center">
       <h1>Sign Out</h1>
       <button onClick={doSignOut} className="btn btn-warning">Sign out</button>
+      </div>
+      </div>
     </React.Fragment>
   );
 }
