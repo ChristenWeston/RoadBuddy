@@ -30,3 +30,6 @@ code {
   color: black;
 	position: absolute;
 }
+.centerTitle {
+  text-align: center;
+}

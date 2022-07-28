@@ -17,7 +17,7 @@ function MainTripDetail(props){
       <React.Fragment>
         <hr/>
         <div class="container">
-        <h1>My Trips</h1>
+        <h1 className="centerTitle text-muted">My Trips</h1>
         {mainTrip.map((trip) => {
           return <MyTrip
             whenTripClicked = { props.onTripSelection }
