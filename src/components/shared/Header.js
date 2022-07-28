@@ -1,43 +1,37 @@
 import React from "react";
 import mapImage from "./../../img/map.png";
 import { Link } from "react-router-dom";
-import styled from 'styled-components';
 
-const RoadBuddyHeader = styled.h2`
-  text-align: center;
-
-  &:hover {
-    color: MistyRose;
-  }
-`;
-
-const StyledWrapper = styled.section`
-  margin: 10px;
-`;
-
-function Header(){
+function Header() {
   return (
-    
-      <React.Fragment>
-        <StyledWrapper>
-          <RoadBuddyHeader>
-            <p>Road Buddy</p>
-          </RoadBuddyHeader>
-          <img src={mapImage} id="map" alt="A map open on a table" />
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/signin">Sign In</Link>
-            </li>
-            <li>
-              <Link to="/start">Begin trip</Link>
-            </li>
-          </ul>
-        </StyledWrapper>
-      </React.Fragment>
-    
+    <React.Fragment>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="/">Road Buddy</a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarColor01">
+            <ul className="navbar-nav me-auto">
+              <li className="nav-item">
+                <a className="nav-link active" href="/">Home
+                  <span className="visually-hidden">(current)</span>
+                </a>
+              </li>
+              <li className="nav-item">
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/signin">Sign In</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/about">About</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </React.Fragment>
+
   );
 }
 
