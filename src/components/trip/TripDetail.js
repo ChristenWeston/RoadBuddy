@@ -41,7 +41,7 @@ function TripDetail(props) {
                     {thisTripsActivities.filter(todaysActivity => todaysActivity.activityDayOfTrip == (index + 1)).map((activity, index2) => (
                       <div key={index2} className="card-body">
                         <h4 className="card-title">{activity.name}</h4>
-                        <p className="card-text">{activity.type}</p>
+                        <p className="card-text"> <span className={((activity.type)) === 'park' ? 'badge bg-success' : 'badge bg-warning' }>{activity.type}</span></p>
                       </div>
                     ))}
                   </div>
