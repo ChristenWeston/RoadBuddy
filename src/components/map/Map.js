@@ -553,7 +553,9 @@ function MapComponent(props) {
                 placeholder='Waypoints'
                 ref={waypointsRef}
             /> */}
-            <button colorscheme='pink' type='submit' onClick={calculateRoute}>
+            <br />
+            <div class="btn-group">
+            <button className="btn btn-success" type='submit' onClick={calculateRoute}>
                 Calculate Route
             </button>
             <MapSearch
@@ -561,6 +563,7 @@ function MapComponent(props) {
                 key={JSON.stringify(clickedPos)}
                 theMainTripSelection={JSON.stringify(theMainTripSelection)}
             />
+            </div>
         </GoogleMap>
     )
 }

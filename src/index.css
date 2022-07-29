@@ -19,18 +19,31 @@ code {
 #mapContainer {
 	padding: 30px;
   color: black;
-  
 }
 
 #mapClipPath {
-	height: 688px;
-	width: 1100px;
-  right: 10px;
+	height: 825px;
+	width: 1320px;
+  right: 25px;
 	background-color: white;
   color: black;
 	position: absolute;
 }
 .centerTitle {
   text-align: center;
+}
+
+button {
+  margin: 5px;
+}
+
+#searchOptions {
+  max-width: 125px;
+  color: black;
+  margin: 10px;
+}
+
+option {
+  color: black
 }
 

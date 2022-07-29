@@ -21,7 +21,7 @@ function TripDetail(props) {
         <div class="container">
           <h1>Trip Detail</h1>
           <h2>{trip.tripName}</h2>
-          <p><em>{trip.startDate} - {trip.endDate}</em></p>
+          <p><em>Dates {trip.startDate} - {trip.endDate}</em></p>
           {/* <div key={tripDays.id} className="card border-secondary mb-3" style={{maxWidth: `20rem`}}>
           <div className="card-header">Header</div>
             <div className="card-body">
@@ -32,22 +32,24 @@ function TripDetail(props) {
 
           {trip.tripDays.map((tripDays, index) => (
             <div key={tripDays.id}>
-              <h3>Trip Day {index + 1}</h3>
-              <div className="card border-secondary mb-3" style={{ maxWidth: `20rem` }}>
-                <div className="card-header">Trip Day {index + 1}</div>
+              {/* <h3>Trip Day {index + 1}</h3> */}
+              <div className="card border-secondary mb-3" style={{ maxWidth: `40rem` }}>
+                <h3 className="card-header">Trip Day {index + 1}</h3>
                 {thisTripsActivities != '' && (
                   <div>
-                    <h4>Activity</h4>
+                    {/* <h4>Activity</h4> */}
                     {thisTripsActivities.filter(todaysActivity => todaysActivity.activityDayOfTrip == (index + 1)).map((activity, index2) => (
                       <div key={index2} className="card-body">
-                        <h4 className="card-title">{activity.name}</h4>
-                        <p className="card-text"> <span className={((activity.type)) === 'park' ? 'badge bg-success' : 'badge bg-warning' }>{activity.type}</span></p>
+                        <h4 className="card-title">{activity.name} <span className={((activity.type)) === 'park' ? 'badge bg-success' : 'badge bg-warning' }>{activity.type}</span></h4>
+                        <p className="card-text"> </p>
                       </div>
                     ))}
                   </div>
                 )}
               </div>
+              <br />
             </div>
+            
           ))}
           <button className="btn btn-primary" onClick={props.onClickingAddAdventure}>Add Stop To Trip</button>
           <button className="btn btn-primary" onClick={props.onClickingShowMap}>Show me the map!</button>
