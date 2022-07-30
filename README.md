@@ -1,82 +1,35 @@
-# Getting Started with Create React App
+# :luggage: Road Buddy :car:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Created by Christen Weston
 
-## Available Scripts
+#### Capstone Project! Here you can plan a road trip including searching for activities, fun places to stop, hotels along your travels as well as view your trip on a map!
 
-In the project directory, you can run:
+## Technologies Used :woman_technologist:
 
-### `npm start`
+* Git
+* HTML
+* CSS
+* NPM
+* JSX
+* Javascript
+* React
+* Snazzy Maps
+* Redux
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Setup Installation Requirements :scroll:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. :arrow_right:  Clone the Road Buddy repository
+2. :arrow_right:  Open in your favorite IDE
+3. :arrow_right:  run `npm install`
+4. :arrow_right:  run `npm start`
+5. :arrow_right:  Enjoy! :partying_face:
 
-### `npm test`
+# Known Bugs
+:bug: You must click on the map before selecting the type of search from the dropdown
+:bug: You must add days to the form before filling in every field or the form will submit with only two days
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Date Published
+>July 2022
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-
-Notes:
-//Pass back places results to be temporarily loaded on map as props since MapSearch is in Map?
-//Update HotelSearch to include user input for location
-//Initial form for trip including nights and stop and start location
-//Add option to determine which date/time for each stop added
-//Figure out how to add value to a state array onClick in form
-// Remove failed attempts to pass down activities as props since pulling directly in trip detail. So, cleanup TripControl, MainTripDetail with activity biz
-// Figure out why it keeps submitting the form when adding in days
-// Surface directions
-// Finish readme
+## License Info
+[MIT License](https://opensource.org/licenses/MIT)
