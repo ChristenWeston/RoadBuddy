@@ -29,7 +29,8 @@ function MapComponent(props) {
 
     useEffect(() => {
         if (allTrips !== null) {
-            console.log(JSON.stringify(allTrips));
+            // console.log(JSON.stringify(allTrips));
+            console.log("We got trip locations!");
         }
     }, [allTrips])
 
@@ -132,7 +133,7 @@ function MapComponent(props) {
             }
         ]
     }
-]
+];
 
     const onLoad = polygon => {
         console.log("polygon: ", polygon);
