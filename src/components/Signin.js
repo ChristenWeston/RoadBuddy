@@ -50,7 +50,6 @@ function Signin() {
               className='form-control-plaintext'
               name='email'
               placeholder='email' />
-
             <input
               type='password'
               className='form-control-plaintext'

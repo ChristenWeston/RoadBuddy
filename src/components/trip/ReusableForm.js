@@ -144,7 +144,6 @@ const ReusableForm = (props) => {
             placeholder="Stopover location"
             value={wayPoints}
             onChange={(e) => setWaypoints(e.target.value)} />
-
           <br />
           <button className="btn btn-primary btn-lg" onSubmit={addNewTrip}>Save trip</button>
           <br />
