@@ -394,14 +394,8 @@ function MapComponent(props) {
         setClickedPos({ lat: e.latLng.lat(), lng: e.latLng.lng() });
     }
 
-    useEffect(() => {
-        if (clickedPos !== {}) {
-            console.log("Clicked pos: " + JSON.stringify(clickedPos))
-        }
-    }, [clickedPos])
-
     async function calculateRoute() {
-        console.log("calculating route: " + (JSON.stringify(theMainTripSelection)));
+        console.log("Calcuating route");
         if (theMainTripSelection.startLocation === '' || theMainTripSelection.endLocation === '') {
             return
         }
@@ -554,7 +548,7 @@ function MapComponent(props) {
                 ref={waypointsRef}
             /> */}
             <br />
-            <div class="btn-group">
+
             <button className="btn btn-success" type='submit' onClick={calculateRoute}>
                 Calculate Route
             </button>
@@ -563,7 +557,7 @@ function MapComponent(props) {
                 key={JSON.stringify(clickedPos)}
                 theMainTripSelection={JSON.stringify(theMainTripSelection)}
             />
-            </div>
+
         </GoogleMap>
     )
 }

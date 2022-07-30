@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from "prop-types";
 import Trip from "./Trip";
-import {v4 as uuidv4} from "uuid";
+import { v4 as uuidv4 } from "uuid";
 import { useFirestore } from 'react-redux-firebase';
 import { useHistory } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
@@ -22,7 +22,7 @@ const ReusableForm = (props) => {
     event.preventDefault();
     props.onNewTripCreation();
     console.log("Add new trip");
-    
+
     return firestore.collection("mainTrip").add({
       tripName: tripName,
       startDate: startDate,
@@ -42,7 +42,7 @@ const ReusableForm = (props) => {
 
   const handleChangeInput = (id, event) => {
     const newInputFields = inputFields.map(i => {
-      if(id === i.id) {
+      if (id === i.id) {
         i[event.target.name] = event.target.value
       }
       return i;
@@ -51,11 +51,11 @@ const ReusableForm = (props) => {
   }
 
   const handleAddFields = () => {
-    setInputFields([...inputFields, { id: uuidv4(),  foodStop: '', adventureStop: '' }])
+    setInputFields([...inputFields, { id: uuidv4(), foodStop: '', adventureStop: '' }])
   }
 
   const handleRemoveFields = id => {
-    const values  = [...inputFields];
+    const values = [...inputFields];
     values.splice(values.findIndex(value => value.id === id), 1);
     setInputFields(values);
   }
@@ -63,7 +63,7 @@ const ReusableForm = (props) => {
   return (
     <React.Fragment>
       <form onSubmit={addNewTrip}>
-      <input required
+        <input required
           type="text"
           className="form-control"
           name="tripName"
@@ -74,9 +74,9 @@ const ReusableForm = (props) => {
           type="date"
           className="form-control"
           name="startDate"
-          placeholder="First day of trip" 
+          placeholder="First day of trip"
           value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}/>
+          onChange={(e) => setStartDate(e.target.value)} />
         <input required
           type="date"
           className="form-control"
@@ -95,9 +95,9 @@ const ReusableForm = (props) => {
           type="text"
           className="form-control"
           name="endLocation"
-          placeholder="Ending location" 
+          placeholder="Ending location"
           value={endLocation}
-          onChange={(e) => setEndLocation(e.target.value)}/>
+          onChange={(e) => setEndLocation(e.target.value)} />
         <input required
           type="number"
           className="form-control"
@@ -111,10 +111,10 @@ const ReusableForm = (props) => {
           className="form-control"
           min={1}
           name="waypoints"
-          placeholder="waypoint" 
+          placeholder="waypoint"
           value={wayPoints}
-          onChange={(e) => setWaypoints(e.target.value)}/>
-        { inputFields.map(inputField => (
+          onChange={(e) => setWaypoints(e.target.value)} />
+        {inputFields.map(inputField => (
           <div key={inputField.id}>
             <label>Food Stop</label>
             <input
@@ -139,10 +139,10 @@ const ReusableForm = (props) => {
             <button className="btn btn-warning btn-sm" disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>Remove Day</button>
             <button className="btn btn-light btn-sm" onClick={handleAddFields}>Add day</button>
           </div>
-        )) }
-          <br />
-        	<button className="btn btn-primary btn-lg" onSubmit={addNewTrip}>Save trip</button>
-          <br />
+        ))}
+        <br />
+        <button className="btn btn-primary btn-lg" onSubmit={addNewTrip}>Save trip</button>
+        <br />
       </form>
       <br />
     </React.Fragment>

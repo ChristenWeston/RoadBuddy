@@ -71,5 +71,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 Notes:
-//Use Memo (or similar) for places search result
-//Pass back places results to be temporarily loaded on map
+//Pass back places results to be temporarily loaded on map as props since MapSearch is in Map?
+//Update HotelSearch to include user input for location
+//Initial form for trip including nights and stop and start location
+//Add option to determine which date/time for each stop added
+//Figure out how to add value to a state array onClick in form
+// Remove failed attempts to pass down activities as props since pulling directly in trip detail. So, cleanup TripControl, MainTripDetail with activity biz
+// Figure out why it keeps submitting the form when adding in days
+// Surface directions
+// Finish readme

@@ -59,20 +59,21 @@ function MapSearch(props) {
 
   return (
     <React.Fragment>
-      <select className ="form-control mb-2" name="searchOptions" id="searchOptions" defaultValue="" onChange={(e) => setSearchType(e.target.value)} onSelect={(e) => setSearchType(e.target.value)}>
-        <option value="" disabled>Search for ...</option>
-        <option value="cafe">Cafes</option>
-        <option value="museum">Museums</option>
-        <option value="book_store">Book stores</option>
-        <option value="park">Parks</option>
-        <option value="tourist_attraction">Touristy places</option>
-        <option value="store">Stores</option>
-        <option value="restaurant">Restaurants</option>
-        <option value="hotel">Hotels</option>
-      </select>
+      <div class="btn-group">
+        <select className="form-control mb-2" name="searchOptions" id="searchOptions" defaultValue="" onChange={(e) => setSearchType(e.target.value)} onSelect={(e) => setSearchType(e.target.value)}>
+          <option value="" disabled>Search for ...</option>
+          <option value="cafe">Cafes</option>
+          <option value="museum">Museums</option>
+          <option value="book_store">Book stores</option>
+          <option value="park">Parks</option>
+          <option value="tourist_attraction">Touristy places</option>
+          <option value="store">Stores</option>
+          <option value="restaurant">Restaurants</option>
+          <option value="hotel">Hotels</option>
+        </select>
 
-      <button className="btn btn-success" onClick={() => { fetchNearbyPlaces(theLocation, placeRadius, searchType) }}>Search!</button>
-
+        <button className="btn btn-success" onClick={() => { fetchNearbyPlaces(theLocation, placeRadius, searchType) }}>Search!</button>
+      </div>
       <p>{props.theClickedCurrentPos}</p>
       <div>
         {searchResults && (

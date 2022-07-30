@@ -29,7 +29,7 @@ class TripControl extends React.Component {
     console.log("Trip mounted");
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     console.log("Trip unmounted");
   }
 
@@ -56,7 +56,7 @@ class TripControl extends React.Component {
 
   handleChangingSelectedTrip = (id) => {
     console.log("changing selected trip");
-    this.props.firestore.get({collection: 'mainTrip', doc: id}).then((trip) => {
+    this.props.firestore.get({ collection: 'mainTrip', doc: id }).then((trip) => {
       const firestoreTrip = {
         tripName: trip.get("tripName"),
         startDate: trip.get("startDate"),
@@ -69,7 +69,7 @@ class TripControl extends React.Component {
         id: trip.id
       }
       console.log("Firestoretrip: " + firestoreTrip);
-      this.setState({selectedTrip: firestoreTrip });
+      this.setState({ selectedTrip: firestoreTrip });
     });
   }
 
@@ -92,13 +92,13 @@ class TripControl extends React.Component {
   }
 
   handleDeletingTrip = (id) => {
-    this.props.firestore.delete({collection: 'mainTrip', doc: id});
-    this.setState({selectedTrip: null});
+    this.props.firestore.delete({ collection: 'mainTrip', doc: id });
+    this.setState({ selectedTrip: null });
   }
 
   handleEditClick = () => {
     console.log("Handle edit trip click");
-    this.setState({editing: true});
+    this.setState({ editing: true });
   }
 
   handleEditingTripInList = () => {
@@ -109,16 +109,16 @@ class TripControl extends React.Component {
   }
 
   handleAddingAdventure = () => {
-    this.setState({mapSearchVisible: true});
+    this.setState({ mapSearchVisible: true });
     console.log("Adding adventure time");
   }
 
   handleShowMap = () => {
-    this.setState({mapSearchVisible: true});
+    this.setState({ mapSearchVisible: true });
     console.log("Show me that map!");
   }
 
-  render(){
+  render() {
     const auth = this.props.firebase.auth();
     if (!isLoaded(auth)) {
       return (
@@ -134,68 +134,68 @@ class TripControl extends React.Component {
           <h1>You must be signed in to access Road Buddy!</h1>
         </React.Fragment>
       )
-    } 
+    }
     //isLoaded checks with firebase to see if the auth state has been loaded or not.
     if ((isLoaded(auth)) && (auth.currentUser != null)) {
       let currentlyVisibleState = null;
-      let buttonText = null; 
+      let buttonText = null;
       console.log("isLoaded and auth.currentUser is not null: " + auth.currentUser);
 
-      if (this.state.editing ) {      
-        currentlyVisibleState = <EditTripForm trip = {this.state.selectedTrip} 
-        onEditTrip = {this.handleEditingTripInList} />
+      if (this.state.editing) {
+        currentlyVisibleState = <EditTripForm trip={this.state.selectedTrip}
+          onEditTrip={this.handleEditingTripInList} />
         buttonText = "Return to Trip List";
       } else if (this.state.selectedTrip != null && this.state.mapSearchVisible == null) {
-        currentlyVisibleState = <TripDetail trip = {this.state.selectedTrip}
-          activities = {this.state.selectedActivity}
-          onClickingDelete = {this.handleDeletingTrip} 
-          onClickingEdit = {this.handleEditClick} 
-          onClickingAddAdventure = {this.handleAddingAdventure}
-          onClickingShowMap = {this.handleShowMap}/>
+        currentlyVisibleState = <TripDetail trip={this.state.selectedTrip}
+          activities={this.state.selectedActivity}
+          onClickingDelete={this.handleDeletingTrip}
+          onClickingEdit={this.handleEditClick}
+          onClickingAddAdventure={this.handleAddingAdventure}
+          onClickingShowMap={this.handleShowMap} />
         buttonText = "Return to My Trips";
       } else if (this.state.selectedTrip != null && this.state.mapSearchVisible != null) {
-        currentlyVisibleState = 
-        <div className="d-flex flex-row bd-highlight mb-3">
-          <div>
-            <TripDetail trip = {this.state.selectedTrip}
-            activities = {this.state.selectedActivity}
-            onClickingDelete = {this.handleDeletingTrip} 
-            onClickingEdit = {this.handleEditClick} 
-            onClickingAddAdventure = {this.handleAddingAdventure}
-            onClickingShowMap = {this.handleShowMap}/>
-          </div>
-          <div className="p-2 bd-highlight" id="mapContainer">
-            <div id="mapClipPath">
-              <Map theMainTripSelection= {this.state.selectedTrip}/>
+        currentlyVisibleState =
+          <div className="d-flex flex-row bd-highlight mb-3">
+            <div>
+              <TripDetail trip={this.state.selectedTrip}
+                activities={this.state.selectedActivity}
+                onClickingDelete={this.handleDeletingTrip}
+                onClickingEdit={this.handleEditClick}
+                onClickingAddAdventure={this.handleAddingAdventure}
+                onClickingShowMap={this.handleShowMap} />
+            </div>
+            <div className="p-2 bd-highlight" id="mapContainer">
+              <div id="mapClipPath">
+                <Map theMainTripSelection={this.state.selectedTrip} />
+              </div>
             </div>
           </div>
-        </div>
         buttonText = "Return to My Trips";
       } else if (this.props.formVisibleOnPage) {
         console.log("Form visible on page");
-        currentlyVisibleState = <Hotels onNewTripCreation={this.handleAddingNewTripToList}  />;
-        currentlyVisibleState = <ReusableForm onNewTripCreation={this.handleAddingNewTripToList}  />;
+        currentlyVisibleState = <Hotels onNewTripCreation={this.handleAddingNewTripToList} />;
+        currentlyVisibleState = <ReusableForm onNewTripCreation={this.handleAddingNewTripToList} />;
         buttonText = "Return to Trip List";
       } else {
         // currentlyVisibleState = <TripList tripList={this.props.mainTripList} onTripSelection={this.handleChangingSelectedTrip} />;
-        currentlyVisibleState = 
-        <div>
-          {/* <div id="mapContainer">
+        currentlyVisibleState =
+          <div>
+            {/* <div id="mapContainer">
             <div id="mapClipPath">
               <Map />
             </div>
           </div>
           <ReusableForm /> 
           <Hotels onNewTripCreation={this.handleAddingNewTripToList}/> */}
-          <MainTripDetail MainTripDetail={this.props.mainTripList} onTripSelection={this.handleChangingSelectedTrip} onActivities={this.handleChangingSelectedTripActivities}/>
-        </div>;
+            <MainTripDetail MainTripDetail={this.props.mainTripList} onTripSelection={this.handleChangingSelectedTrip} onActivities={this.handleChangingSelectedTripActivities} />
+          </div>;
         // Because a user will actually be clicking on the trip in the Trip component, we will need to pass our new handleChangingSelectedTrip method as a prop.
         buttonText = "Add Trip";
       }
       return (
         <React.Fragment>
           {currentlyVisibleState}
-          <button className="btn btn-primary" onClick = {this.handleClick}>{buttonText}</button>
+          <button className="btn btn-primary" onClick={this.handleClick}>{buttonText}</button>
         </React.Fragment>
       );
     }

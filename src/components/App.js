@@ -12,13 +12,13 @@ import Signin from "./Signin";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import { ProvideAuth } from "./use-auth.js";
 
-function App(){
+function App() {
 
-  return ( 
+  return (
     <React.Fragment>
-        <Router>
-          <Header />
-          <div className="d-flex flex-row">
+      <Router>
+        <Header />
+        <div className="d-flex flex-row">
           {/* <ReusableForm /> */}
           {/* <Sidebar /> */}
           {/* <TripControl /> */}
@@ -28,25 +28,25 @@ function App(){
                     <Map />
                 </div>
             </div> */}
-          </div>
-          <div className ="form-group row">
-            <div className="col-sm-10">
-              <Switch>
-                <Route path="/signin">
-                  <Signin />
-                </Route>
-                <Route path="/start">
-                  <ReusableForm />
-                </Route>
-                <Route path="/">
-                  <TripControl />
-                </Route>
+        </div>
+        <div className="form-group row">
+          <div className="col-sm-10">
+            <Switch>
+              <Route path="/signin">
+                <Signin />
+              </Route>
+              <Route path="/start">
+                <ReusableForm />
+              </Route>
+              <Route path="/">
+                <TripControl />
+              </Route>
 
             </Switch>
           </div>
         </div>
 
-        </Router>
+      </Router>
     </React.Fragment>
   );
 }
