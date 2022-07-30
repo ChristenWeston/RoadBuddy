@@ -141,7 +141,7 @@ function MapSearch(props) {
                   value={tripDayToAddFoundPlace}
                   onChange={event => setTripDayToAddFoundPlace(event.target.value)}
                 />
-                <button onClick={(e) => { setSelectedPlace(e.target.value) }} value={JSON.stringify(origArray[index])}>Add to trip</button>
+                <button className="btn btn-secondary" onClick={(e) => { setSelectedPlace(e.target.value) }} value={JSON.stringify(origArray[index])}>Add to trip</button>
               </div>
             ))}
           </div>
@@ -170,7 +170,7 @@ function MapSearch(props) {
                   value={tripDayToAddFoundPlace}
                   onChange={event => setTripDayToAddFoundPlace(event.target.value)}
                 />
-                <button onClick={(e) => { setSelectedHotel(e.target.value) }} value={JSON.stringify(origArray[index])}>Add to trip</button>
+                <button className="btn btn-secondary" onClick={(e) => { setSelectedHotel(e.target.value) }} value={JSON.stringify(origArray[index])}>Add to trip</button>
               </div>
             ))}
           </div>
