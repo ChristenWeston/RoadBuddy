@@ -41,7 +41,7 @@ function Signin() {
 
   return (
     <React.Fragment>
-      <div class="container">
+      <div className="container">
         <div className="text-center">
           <h1>Sign up</h1>
           <form onSubmit={doSignUp}>

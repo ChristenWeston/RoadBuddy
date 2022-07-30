@@ -13,6 +13,7 @@ function MapSearch(props) {
   const [searchType, setSearchType] = useState('');
   const [hotelSearchResults, setHotelSearchResults] = useState(null)
   const [searchResults, setSearchResults] = useState(null);
+  const [selectedHotel, setSelectedHotel] = useState('');
   const [selectedPlace, setSelectedPlace] = useState('');
   const [selectedIndex, setSelectedIndex] = useState('');
   const [tripDayToAddFoundPlace, setTripDayToAddFoundPlace] = useState('');
@@ -42,7 +43,7 @@ function MapSearch(props) {
       else if (searchType === 'hotel') {
         console.log("Hotel search time");
         const hotelResponse = await fetch(
-          `https://hotels-com-provider.p.rapidapi.com/v1/hotels/nearby?latitude=51.509865&currency=USD&longitude=-0.118092&checkout_date=2022-09-27&sort_order=STAR_RATING_HIGHEST_FIRST&checkin_date=2022-09-26&adults_number=1&locale=en_US&guest_rating_min=4&star_rating_ids=3%2C4%2C5&children_ages=4%2C0%2C15&page_number=1&price_min=10&accommodation_ids=20%2C8%2C15%2C5%2C1&theme_ids=14%2C27%2C25&price_max=500&amenity_ids=527%2C2063`,
+          `https://hotels-com-provider.p.rapidapi.com/v1/hotels/nearby?latitude=${lat}&currency=USD&longitude=${lng}&checkout_date=2022-09-27&sort_order=STAR_RATING_HIGHEST_FIRST&checkin_date=2022-09-26&adults_number=1&locale=en_US&star_rating_ids=3%2C4%2C5&page_number=1&price_min=10&accommodation_ids=20%2C8%2C15%2C5%2C1&price_max=500&amenity_ids=527%2C2063`,
           {
             method: 'GET',
             headers: {
@@ -73,8 +74,8 @@ function MapSearch(props) {
       console.log("selected lat jsons parse.name: " + (JSON.parse(selectedPlace)).location.lat);
       firestore.collection("trips").add({
         name: (JSON.parse(selectedPlace)).name || null,
-        latitude: (JSON.parse(selectedPlace)).location.lat || null,
-        longitude: (JSON.parse(selectedPlace)).location.lng || null,
+        latitude: (JSON.parse(selectedPlace)).location.lat || (JSON.parse(selectedPlace)).coordinate.lat || null,
+        longitude: (JSON.parse(selectedPlace)).location.lng || (JSON.parse(selectedPlace)).coordinate.lon || null,
         type: searchType || null,
         matchingTripId: (JSON.parse(mainTripSelection)).id || null,
         activityDayOfTrip: (JSON.parse(tripDayToAddFoundPlace)) || null
@@ -82,6 +83,21 @@ function MapSearch(props) {
       );
     }
   }, [selectedPlace])
+
+  useEffect(() => {
+    if (selectedHotel !== '') {
+      console.log("selected hotel lat jsons parse.name: " + (JSON.parse(selectedHotel)).coordinate.lat);
+      firestore.collection("trips").add({
+        name: (JSON.parse(selectedHotel)).name || null,
+        latitude: (JSON.parse(selectedHotel)).coordinate.lat || null,
+        longitude: (JSON.parse(selectedHotel)).coordinate.lon || null,
+        type: searchType || null,
+        matchingTripId: (JSON.parse(mainTripSelection)).id || null,
+        activityDayOfTrip: (JSON.parse(tripDayToAddFoundPlace)) || null
+      }
+      );
+    }
+  }, [selectedHotel])
 
   return (
     <React.Fragment>
@@ -139,11 +155,9 @@ function MapSearch(props) {
             {hotelSearchResults.results.map((nearbyResults, index, origArray) => (
               <div key={index}>
                 <h2>{nearbyResults.name}</h2>
-                {/* <h3>{nearbyResults.address}</h3>
-                <p>Phone Number: {nearbyResults.phone_number}</p>
-                <p><a href={nearbyResults.website}>{nearbyResults.website}</a></p>
-                <p>Distance from location: {nearbyResults.distance} meters</p>
-                <p>Lat: {nearbyResults.location.lat} long: {nearbyResults.location.lng}</p> */}
+                <h3>{nearbyResults.address.streetAddress}</h3>
+                <p>Price per night: {nearbyResults.ratePlan.price.current}</p>
+                <p>Lat: {nearbyResults.coordinate.lat} long: {nearbyResults.coordinate.lng}</p>
                 <label>Day of Trip</label>
                 <input
                   name="addToWhichTripDay"
@@ -156,7 +170,7 @@ function MapSearch(props) {
                   value={tripDayToAddFoundPlace}
                   onChange={event => setTripDayToAddFoundPlace(event.target.value)}
                 />
-                <button onClick={(e) => { setSelectedPlace(e.target.value) }} value={JSON.stringify(origArray[index])}>Add to trip</button>
+                <button onClick={(e) => { setSelectedHotel(e.target.value) }} value={JSON.stringify(origArray[index])}>Add to trip</button>
               </div>
             ))}
           </div>
