@@ -4,6 +4,7 @@ import Sidebar from "./shared/Sidebar";
 import Hotels from './hotel/Hotels';
 import TripControl from "./trip/TripControl";
 import ReusableForm from "./trip/ReusableForm";
+import About from "../about/About";
 import styled from 'styled-components';
 import TripList from "./trip/TripList";
 import Map from "./map/Map";
@@ -19,15 +20,6 @@ function App() {
       <Router>
         <Header />
         <div className="d-flex flex-row">
-          {/* <ReusableForm /> */}
-          {/* <Sidebar /> */}
-          {/* <TripControl /> */}
-          {/* <Hotels /> */}
-          {/* <div id="mapContainer">
-                <div id="mapClipPath">
-                    <Map />
-                </div>
-            </div> */}
         </div>
         <div className="form-group row">
           <div className="col-sm-10">
@@ -37,6 +29,9 @@ function App() {
               </Route>
               <Route path="/start">
                 <ReusableForm />
+              </Route>
+              <Route path="/about">
+                <About />
               </Route>
               <Route path="/">
                 <TripControl />

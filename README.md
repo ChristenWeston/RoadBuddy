@@ -27,6 +27,7 @@
 # Known Bugs
 :bug: You must click on the map before selecting the type of search from the dropdown
 :bug: You must add days to the form before filling in every field or the form will submit with only two days
+:bug: Once you have shown the map, it'll show every time you click in to a trip detail
 
 ## Date Published
 >July 2022
