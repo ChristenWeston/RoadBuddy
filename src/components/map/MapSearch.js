@@ -5,7 +5,7 @@ import useFetch from '../shared/useFetch';
 import { doc, setDoc, updateDoc, collection, addDoc } from "firebase/firestore";
 
 function MapSearch(props) {
-  // const theLocation = useContext(CurrentPosition);
+
   const firestore = useFirestore();
   const theLocation = props.theClickedCurrentPos;
   const placeRadius = 4500;
@@ -22,23 +22,23 @@ function MapSearch(props) {
     if (theLocation !== '{}' && theLocation !== null) {
       var lat = JSON.parse(theLocation).lat;
       var lng = JSON.parse(theLocation).lng;
-        if(searchType !== '' && searchType !== 'hotel') {
-          console.log("Fetch nearby places" + JSON.parse(mainTripSelection).tripName + " mainTripSelectionDays" + JSON.parse(mainTripSelection).tripDays[0].adventureStop + JSON.parse(mainTripSelection).numberOfDays);
-          const response = await fetch(
-            `https://trueway-places.p.rapidapi.com/FindPlacesNearby?location=${lat}%2C${lng}&language=en&radius=${placeRadius}&type=${searchType}`,
-            {
-              method: 'GET',
-              headers: {
-                'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY,
-                'x-rapidapi-host': 'trueway-places.p.rapidapi.com'
-              }
-            });
-          if (!response.ok) {
-            throw new Error("Oh no! Something is wrong!")
-          }
-          const data = await response.json();
-          setSearchResults(data.results);
-          return data.results;
+      if (searchType !== '' && searchType !== 'hotel') {
+        console.log("Fetch nearby places" + JSON.parse(mainTripSelection).tripName + " mainTripSelectionDays" + JSON.parse(mainTripSelection).tripDays[0].adventureStop + JSON.parse(mainTripSelection).numberOfDays);
+        const response = await fetch(
+          `https://trueway-places.p.rapidapi.com/FindPlacesNearby?location=${lat}%2C${lng}&language=en&radius=${placeRadius}&type=${searchType}`,
+          {
+            method: 'GET',
+            headers: {
+              'x-rapidapi-key': process.env.REACT_APP_RAPIDAPI_KEY,
+              'x-rapidapi-host': 'trueway-places.p.rapidapi.com'
+            }
+          });
+        if (!response.ok) {
+          throw new Error("Oh no! Something is wrong!")
+        }
+        const data = await response.json();
+        setSearchResults(data.results);
+        return data.results;
       }
       else if (searchType === 'hotel') {
         console.log("Hotel search time");
@@ -57,7 +57,6 @@ function MapSearch(props) {
         }
         const hotelData = await hotelResponse.json();
         setHotelSearchResults(hotelData.searchResults);
-        // console.log("No Problems" + JSON.stringify(hotelData.searchResults.results[0].name));
         return hotelData.searchResults;
       }
     }
@@ -65,13 +64,11 @@ function MapSearch(props) {
 
   useEffect(() => {
     if (hotelSearchResults !== null && hotelSearchResults !== {}) {
-      console.log("Hotel search results are not null: " + (JSON.stringify(hotelSearchResults)));
     }
   }, [hotelSearchResults]);
 
   useEffect(() => {
     if (selectedPlace !== '') {
-      console.log("selected lat jsons parse.name: " + (JSON.parse(selectedPlace)).location.lat);
       firestore.collection("trips").add({
         name: (JSON.parse(selectedPlace)).name || null,
         latitude: (JSON.parse(selectedPlace)).location.lat || (JSON.parse(selectedPlace)).coordinate.lat || null,
@@ -86,7 +83,6 @@ function MapSearch(props) {
 
   useEffect(() => {
     if (selectedHotel !== '') {
-      console.log("selected hotel lat jsons parse.name: " + (JSON.parse(selectedHotel)).coordinate.lat);
       firestore.collection("trips").add({
         name: (JSON.parse(selectedHotel)).name || null,
         latitude: (JSON.parse(selectedHotel)).coordinate.lat || null,
