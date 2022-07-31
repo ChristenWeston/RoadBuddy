@@ -4,10 +4,10 @@ import MyTrip from "./myTrip";
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 
-function MainTripDetail(props){
+function MainTripDetail(props) {
   useFirestoreConnect([
     { collection: 'mainTrip' },
-    { collection: 'trips'}
+    { collection: 'trips' }
   ]);
 
   const mainTrip = useSelector(state => state.firestore.ordered.mainTrip);
@@ -15,24 +15,23 @@ function MainTripDetail(props){
   if (isLoaded(mainTrip) && isLoaded(tripLocations)) {
     return (
       <React.Fragment>
-        <hr/>
-        <div class="container">
-        <h1 className="centerTitle text-muted">My Trips</h1>
-        {mainTrip.map((trip) => {
-          return <MyTrip
-            whenTripClicked = { props.onTripSelection }
-            tripName={trip.tripName}
-            startDate={trip.startDate}
-            endDate={trip.endDate}
-            startLocation={trip.startLocation}
-            endLocation={trip.endLocation}
-            numberOfDays={trip.tripDays.length}
-            wayPoints={trip.wayPoints}
-            tripDays={trip.tripDays}
-            // activities={JSON.stringify(tripLocations)}
-            id={trip.id}
-            key={trip.id}/>
-        })}
+        <hr />
+        <div className="container">
+          <h1 className="centerTitle text-muted">My Trips</h1>
+          {mainTrip.map((trip) => {
+            return <MyTrip
+              whenTripClicked={props.onTripSelection}
+              tripName={trip.tripName}
+              startDate={trip.startDate}
+              endDate={trip.endDate}
+              startLocation={trip.startLocation}
+              endLocation={trip.endLocation}
+              numberOfDays={trip.tripDays.length}
+              wayPoints={trip.wayPoints}
+              tripDays={trip.tripDays}
+              id={trip.id}
+              key={trip.id} />
+          })}
         </div>
       </React.Fragment>
     );
