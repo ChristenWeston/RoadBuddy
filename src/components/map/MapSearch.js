@@ -116,13 +116,15 @@ function MapSearch(props) {
           <div>
             <h1>Nearby {searchType}s</h1>
             {searchResults.map((nearbyResults, index, origArray) => (
-              <div key={index}>
-                <h2>{nearbyResults.name}</h2>
-                <h3>{nearbyResults.address}</h3>
-                <p>Phone Number: {nearbyResults.phone_number}</p>
-                <p><a href={nearbyResults.website}>{nearbyResults.website}</a></p>
-                <p>Distance from location: {nearbyResults.distance} meters</p>
-                <p>Lat: {nearbyResults.location.lat} long: {nearbyResults.location.lng}</p>
+              <div className="card border-success mb-3" key={index}>
+                <div className="card-header">{nearbyResults.name}</div>
+                <div className="card-body">
+                <h3 className="card-title">{nearbyResults.address}</h3>
+                <p className="card-text">Phone Number: {nearbyResults.phone_number}</p>
+                <p className="card-text"><a href={nearbyResults.website}>{nearbyResults.website}</a></p>
+                <p className="card-text">Distance from location: <em>{nearbyResults.distance} </em>meters</p>
+                <p className="card-text">Lat: {nearbyResults.location.lat} long: {nearbyResults.location.lng}</p>
+                </div>
                 {/* <p>Main Trip Selection: {JSON.parse(mainTripSelection)}</p> */}
 
                 <label>Day of Trip</label>
@@ -149,11 +151,13 @@ function MapSearch(props) {
           <div>
             <h1>Nearby {searchType}s</h1>
             {hotelSearchResults.results.map((nearbyResults, index, origArray) => (
-              <div key={index}>
-                <h2>{nearbyResults.name}</h2>
-                <h3>{nearbyResults.address.streetAddress}</h3>
-                <p>Price per night: {nearbyResults.ratePlan.price.current}</p>
-                <p>Lat: {nearbyResults.coordinate.lat} long: {nearbyResults.coordinate.lng}</p>
+              <div className="card border-success mb-3"key={index}>
+                <div className="card-header">{nearbyResults.name}</div>
+                <div className="card-body">
+                <h3 className="card-title">{nearbyResults.address.streetAddress}</h3>
+                <p className="card-text">Price per night: {nearbyResults.ratePlan.price.current}</p>
+                <p className="card-text">Lat: {nearbyResults.coordinate.lat} long: {nearbyResults.coordinate.lon}</p>
+                </div>
                 <label>Day of Trip</label>
                 <input
                   name="addToWhichTripDay"
