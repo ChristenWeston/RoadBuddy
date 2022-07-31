@@ -1,7 +1,5 @@
 import React from "react";
-import Particles from "react-particles";
 import mapImage from "../img/map.png";
-
 
 const About = () => {
   return (
