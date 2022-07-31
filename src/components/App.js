@@ -36,11 +36,9 @@ function App() {
               <Route path="/">
                 <TripControl />
               </Route>
-
             </Switch>
           </div>
         </div>
-
       </Router>
     </React.Fragment>
   );

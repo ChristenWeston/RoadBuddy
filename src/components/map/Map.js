@@ -11,7 +11,6 @@ import {
     Polyline,
     Waypoint
 } from "react-google-maps";
-import properties from "./data/Properties.json";
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
 import MapSearch, { MapSearchResults } from "./MapSearch";
@@ -34,13 +33,6 @@ function MapComponent(props) {
         }
     }, [allTrips])
 
-    const paths = [
-        { lat: 45.52180183501188, lng: -122.62568532656492 },
-        { lat: 45.47710287706964, lng: -122.63684331637737 },
-        { lat: 45.52661252732071, lng: -122.67332135870465 },
-        { lat: 45.52180183501188, lng: -122.62568532656492 },
-    ]
-
     const options = {
         fillColor: "lightblue",
         fillOpacity: 1,
@@ -55,85 +47,85 @@ function MapComponent(props) {
     }
 
     const mapStyles = [
-    {
-        "featureType": "administrative",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#444444"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#f2f2f2"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": 45
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#5771B9"
-            },
-            {
-                "visibility": "on"
-            }
-        ]
-    }
-];
+        {
+            "featureType": "administrative",
+            "elementType": "labels.text.fill",
+            "stylers": [
+                {
+                    "color": "#444444"
+                }
+            ]
+        },
+        {
+            "featureType": "landscape",
+            "elementType": "all",
+            "stylers": [
+                {
+                    "color": "#f2f2f2"
+                }
+            ]
+        },
+        {
+            "featureType": "poi",
+            "elementType": "all",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "road",
+            "elementType": "all",
+            "stylers": [
+                {
+                    "saturation": -100
+                },
+                {
+                    "lightness": 45
+                }
+            ]
+        },
+        {
+            "featureType": "road.highway",
+            "elementType": "all",
+            "stylers": [
+                {
+                    "visibility": "simplified"
+                }
+            ]
+        },
+        {
+            "featureType": "road.arterial",
+            "elementType": "labels.icon",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "transit",
+            "elementType": "all",
+            "stylers": [
+                {
+                    "visibility": "off"
+                }
+            ]
+        },
+        {
+            "featureType": "water",
+            "elementType": "all",
+            "stylers": [
+                {
+                    "color": "#5771B9"
+                },
+                {
+                    "visibility": "on"
+                }
+            ]
+        }
+    ];
 
     const onLoad = polygon => {
         console.log("polygon: ", polygon);
@@ -168,24 +160,7 @@ function MapComponent(props) {
         const results = await directionsService.route({
             origin: theMainTripSelection.startLocation,
             destination: theMainTripSelection.endLocation,
-            // waypoints: [
-            //     {
-            //         location: new window.google.maps.LatLng(46.5, -123.5),
-            //         stopover: true
-            //     }, {
-            //         location: 'Oklahoma City, OK',
-            //         stopover: true
-            //     }],
-            // ToDo pull waypoints from here
-            // waypoints: [
-            // onlyThisTripsActivities.map((latLng, index) => (
-            //     {
-            //         location: (parseFloat(latLng.latitude), parseFloat(latLng.longitude)),
-            //         stopover: true
-            //     }
-            // ) )
-            // ],
-            // optimizeWaypoints: true,
+            // ToDo add in Waypoints
             // eslint-disable-next-line no-undef
             travelMode: google.maps.TravelMode.DRIVING,
         })
@@ -195,15 +170,6 @@ function MapComponent(props) {
         setDuration(results.routes[0].legs[0].duration.text)
     }
 
-    //   function clearRoute() {
-    //     setDirectionsResponse(null)
-    //     setDistance('')
-    //     setDuration('')
-    //     originRef.current.value = ''
-    //     destiantionRef.current.value = ''
-    //     waypointsRef.current.value = ''
-    //   }
-
     return (
         <GoogleMap
             defaultZoom={5}
@@ -212,41 +178,6 @@ function MapComponent(props) {
             onClick={onMapClick}
             theMainTripSelection={props.theMainTripSelection}
         >
-            {/* {properties.map(property => (
-                <Marker 
-                    key={property.id} 
-                    position={{
-                        lat: property.lat, 
-                        lng: property.lng
-                    }}
-                    icon={{
-                        url: "https://cdn-icons-png.flaticon.com/512/3468/3468377.png",
-                        //https://i.imgur.com/FpHIBa7.png
-                        //https://cdn-icons-png.flaticon.com/512/7880/7880087.png
-                        scaledSize: new window.google.maps.Size(25, 25)
-                    }}
-                    onClick ={() => {
-                        setSelectedProperty(property);
-                    }}
-                />
-            ))}
-
-            {selectedProperty && (
-                <InfoWindow
-                    position={{
-                        lat: selectedProperty.lat, 
-                        lng: selectedProperty.lng
-                    }}
-                    onCloseClick={() => {
-                        setSelectedProperty(null);
-                    }}
-                >
-                    <div>
-                        <h4>{selectedProperty.name}</h4>
-                    </div>
-                </InfoWindow>
-            )} */}
-
             {onlyThisTripsActivities && (onlyThisTripsActivities.map(trip => (
                 <Marker
                     key={trip.id}
@@ -256,9 +187,6 @@ function MapComponent(props) {
                     }}
                     icon={{
                         url: "https://cdn-icons-png.flaticon.com/512/3468/3468377.png",
-                        //https://cdn.icon-icons.com/icons2/2435/PNG/512/hotel_service_holiday_journey_icon_147421.png
-                        //https://i.imgur.com/FpHIBa7.png
-                        //https://cdn-icons-png.flaticon.com/512/7880/7880087.png
                         scaledSize: new window.google.maps.Size(55, 35)
                     }}
                     onClick={() => {
@@ -283,36 +211,14 @@ function MapComponent(props) {
                 </InfoWindow>
             )}
 
-            {/* <Polygon
-      onLoad={onLoad}
-      paths={paths}
-      options={options}
-    />
-      <Polyline
-      path={[{ lat: 45.47559825717784, lng: -122.53564893387593 }, { lat: 45.512660385980794, lng: -122.59435712512872 }]}
-    /> */}
             <div>
                 {
-
                 }
-                {/* // <p>{MapSearch.props.theClickedCurrentPos && <p>Hi</p>}</p> */}
             </div>
             {directionsResponse && (
                 <DirectionsRenderer directions={directionsResponse} />
             )}
-            {/* <input type='text' placeholder='Origin' ref={originRef} />
-          <input
-            type='text'
-            placeholder='Destination'
-            ref={destiantionRef}
-            /> */}
-            {/* <input
-                type='text'
-                placeholder='Waypoints'
-                ref={waypointsRef}
-            /> */}
             <br />
-
             <button className="btn btn-success" type='submit' onClick={calculateRoute}>
                 Calculate Route
             </button>
@@ -321,7 +227,6 @@ function MapComponent(props) {
                 key={JSON.stringify(clickedPos)}
                 theMainTripSelection={JSON.stringify(theMainTripSelection)}
             />
-
         </GoogleMap>
     )
 }
