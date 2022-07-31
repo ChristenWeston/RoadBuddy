@@ -40,7 +40,6 @@ class TripControl extends React.Component {
         editing: false
       });
     } else {
-      console.log("Handle Click this.props: " + this.props);
       const { dispatch } = this.props;
       const action = a.toggleForm();
       dispatch(action);
@@ -75,20 +74,7 @@ class TripControl extends React.Component {
 
   handleChangingSelectedTripActivities = (id) => {
     console.log("changing selected trip activities");
-    //ToDo select activity here
-    // this.props.firestore.get({collection: 'trips'}).where("matchingTripId", "==", id)
-    // .then((activity) => {
-    //   const firestoreActivitiy = {
-    //     activityDayOfTrip: activity.get("activityDayOfTrip"),
-    //     latitude: activity.get("latitude"),
-    //     longitude: activity.get("longitude"),
-    //     name: activity.get("name"),
-    //     type: activity.get("type"),
-    //     id: activity.id
-    //   }
-    //   console.log("firestoreActivitiy: " + firestoreActivitiy);
-    //   this.setState({selectedActivity: firestoreActivitiy });
-    // });
+    //ToDo 
   }
 
   handleDeletingTrip = (id) => {
@@ -139,8 +125,6 @@ class TripControl extends React.Component {
     if ((isLoaded(auth)) && (auth.currentUser != null)) {
       let currentlyVisibleState = null;
       let buttonText = null;
-      console.log("isLoaded and auth.currentUser is not null: " + auth.currentUser);
-
       if (this.state.editing) {
         currentlyVisibleState = <EditTripForm trip={this.state.selectedTrip}
           onEditTrip={this.handleEditingTripInList} />
@@ -180,13 +164,6 @@ class TripControl extends React.Component {
         // currentlyVisibleState = <TripList tripList={this.props.mainTripList} onTripSelection={this.handleChangingSelectedTrip} />;
         currentlyVisibleState =
           <div>
-            {/* <div id="mapContainer">
-            <div id="mapClipPath">
-              <Map />
-            </div>
-          </div>
-          <ReusableForm /> 
-          <Hotels onNewTripCreation={this.handleAddingNewTripToList}/> */}
             <MainTripDetail MainTripDetail={this.props.mainTripList} onTripSelection={this.handleChangingSelectedTrip} onActivities={this.handleChangingSelectedTripActivities} />
           </div>;
         // Because a user will actually be clicking on the trip in the Trip component, we will need to pass our new handleChangingSelectedTrip method as a prop.
