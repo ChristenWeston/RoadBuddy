@@ -19,10 +19,20 @@
 ## Setup Installation Requirements :scroll:
 
 1. :arrow_right:  Clone the Road Buddy repository
-2. :arrow_right:  Open in your favorite IDE
-3. :arrow_right:  run `npm install`
-4. :arrow_right:  run `npm start`
-5. :arrow_right:  Enjoy! :partying_face:
+2. :arrow_right: Obtain an API Key for RapidAPI at [RapidApi](https://rapidapi.com/) then add it to your .env file as `REACT_APP_RAPIDAPI_KEY =` [YourApiKeyHere]
+3. :arrow_right: Obtain a GoogleMaps API Key at [GoogleMaps](https://developers.google.com/) then add it to your .env file as `REACT_APP_GOOGLE_KEY =` [YourApiKeyHere]
+4. :arrow_right: Obtain a Firebase account at [Firebase](https://firebase.google.com/) then add the following to your .env file:
+  `REACT_APP_FIREBASE_API_KEY =` [YourApiKeyHere]
+  `REACT_APP_FIREBASE_AUTH_DOMAIN =` [YourDomainHere]
+  `REACT_APP_FIREBASE_DATABASE_URL =` [YourUrlHere]
+  `REACT_APP_FIREBASE_PROJECT_ID =` [YourProjectIdHere]
+  `REACT_APP_FIREBASE_STORAGE_BUCKET =` [YourStorageBucketHere]
+  `REACT_APP_FIREBASE_MESSAGING_SENDER_ID =` [YourMessagingSenderIdHere]
+  `REACT_APP_FIREBASE_APP_ID =` [YourAppIdHere]
+5. :arrow_right:  Open in your favorite IDE
+6. :arrow_right:  run `npm install`
+7. :arrow_right:  run `npm start`
+8. :arrow_right:  Enjoy! :partying_face:
 
 # Known Bugs
 :bug: You must click on the map before selecting the type of search from the dropdown
